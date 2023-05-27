@@ -1,0 +1,152 @@
+
+木鸟.png
+size: 2030,1733
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+b-arm 的複製
+  rotate: false
+  xy: 1079, 233
+  size: 107, 310
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+b-leg 的複製
+  rotate: false
+  xy: 1879, 2
+  size: 115, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+b-y
+  rotate: false
+  xy: 2, 545
+  size: 1615, 1186
+  orig: 1618, 1186
+  offset: 3, 0
+  index: -1
+bt
+  rotate: true
+  xy: 1619, 1116
+  size: 615, 335
+  orig: 617, 337
+  offset: 1, 1
+  index: -1
+chest 的複製
+  rotate: false
+  xy: 2, 139
+  size: 93, 163
+  orig: 95, 165
+  offset: 1, 1
+  index: -1
+f-arm 的複製
+  rotate: false
+  xy: 305, 50
+  size: 105, 311
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+f-leg 的複製
+  rotate: true
+  xy: 581, 429
+  size: 114, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+face 的複製
+  rotate: false
+  xy: 581, 307
+  size: 110, 120
+  orig: 112, 122
+  offset: 1, 1
+  index: -1
+g-1
+  rotate: false
+  xy: 1956, 1540
+  size: 20, 82
+  orig: 22, 84
+  offset: 1, 1
+  index: -1
+g-2
+  rotate: true
+  xy: 1956, 1681
+  size: 50, 45
+  orig: 55, 48
+  offset: 2, 2
+  index: -1
+gadget1 的複製
+  rotate: true
+  xy: 1956, 1515
+  size: 23, 20
+  orig: 26, 22
+  offset: 2, 1
+  index: -1
+hair 的複製
+  rotate: true
+  xy: 1879, 950
+  size: 164, 149
+  orig: 166, 151
+  offset: 1, 1
+  index: -1
+neck 的複製
+  rotate: false
+  xy: 1956, 1624
+  size: 40, 55
+  orig: 43, 57
+  offset: 1, 1
+  index: -1
+skirt 的複製
+  rotate: true
+  xy: 2, 304
+  size: 239, 301
+  orig: 239, 301
+  offset: 0, 0
+  index: -1
+tai
+  rotate: true
+  xy: 1619, 440
+  size: 674, 258
+  orig: 674, 258
+  offset: 0, 0
+  index: -1
+tail 的複製
+  rotate: true
+  xy: 305, 363
+  size: 180, 274
+  orig: 180, 275
+  offset: 0, 1
+  index: -1
+圖層 2 的複製
+  rotate: false
+  xy: 1956, 1494
+  size: 15, 19
+  orig: 18, 21
+  offset: 1, 1
+  index: -1
+圖層gadget2-f 2 的複製
+  rotate: false
+  xy: 1879, 725
+  size: 128, 223
+  orig: 130, 226
+  offset: 1, 1
+  index: -1
+圖層gadget2-f 2 的複製 2
+  rotate: false
+  xy: 1879, 500
+  size: 128, 223
+  orig: 130, 226
+  offset: 1, 1
+  index: -1
+
+木鸟2.png
+size: 1618,1190
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+f-y
+  rotate: false
+  xy: 2, 2
+  size: 1614, 1186
+  orig: 1618, 1186
+  offset: 4, 0
+  index: -1

@@ -21,15 +21,16 @@ public class AirVehicleBase : MonoBehaviour
     {
         var hAxis = Input.GetAxisRaw("Horizontal");
         
-        rb.velocity = new Vector2(hAxis * horizontalVelocity, rb.velocity.y);
-        //transform.DOKill();
+        rb.velocity = new Vector2(hAxis * horizontalVelocity, rb.velocity.y);  
         if (hAxis > 0)
         {
-            transform.DORotate(new Vector3(0, 0, 0), 180).SetSpeedBased();
+            transform.DOKill();
+            transform.DORotate(new Vector3(0, 0, 0), 360).SetSpeedBased();
         }
         else if(hAxis < 0)
         {
-            transform.DORotate(new Vector3(0, -180, 0), 180).SetSpeedBased();
+            transform.DOKill();
+            transform.DORotate(new Vector3(0, -180, 0), 360).SetSpeedBased();
         }
         
     }
