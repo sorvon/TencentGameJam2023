@@ -88,15 +88,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6fac4e39926fd9c4ca2ba4416160a857, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.9, y: 2.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7969232219352558150
@@ -187,15 +187,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 08c91a7677e66844281a99aaf6ea36f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7969232220219409827
@@ -288,7 +288,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e36d1a38d7aa309409e80bf66a089330, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -388,7 +388,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f008857e434b98b4eaabda1fd6af3059, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7969232220827834795}
   horizontalVelocity: 10
-  balloonStrength: 50
+  balloonStrength: 30
   maxFuel: 5
 --- !u!212 &7969232220402279833
 SpriteRenderer:
@@ -589,6 +589,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822c4c3590c61514bb2e00a37ce3b929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectionCountConfig: 020000000400000006000000080000000a000000
+  airVehicleList:
+  - {fileID: 7969232219352558150}
+  - {fileID: 7969232220301734621}
+  - {fileID: 7969232220219409827}
+  - {fileID: 7969232219274460500}
+  - {fileID: 7969232220402279834}
+  - {fileID: 7969232220944675389}
+  heightNumberText: {fileID: 0}
+  airVehicleIndex: 0
 --- !u!1 &7969232220944675389
 GameObject:
   m_ObjectHideFlags: 0
