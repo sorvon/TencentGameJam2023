@@ -8,7 +8,7 @@ public class AirVehicleFireworks : AirVehicleBase
 
     [Header("—Ãª≈‰÷√")]
     public float fireStrength = 20;
-    public float directionSensitivity = 45;
+    public float directionSensitivity = 60;
     [SerializeField] CinemachineVirtualCamera vcam;
 
     [Header("Debug")]
@@ -28,7 +28,9 @@ public class AirVehicleFireworks : AirVehicleBase
         fireDirection = Mathf.Clamp(fireDirection - hAxis * directionSensitivity * Time.deltaTime, -45, 45);
         transform.rotation = Quaternion.Euler(0, 0, fireDirection);
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1")
+            || Input.GetKey(KeyCode.D)
+            || Input.GetKey(KeyCode.A))
         {
             var radian = Mathf.Deg2Rad * (fireDirection + 90);
             rb.AddForce(new Vector2(fireStrength * Mathf.Cos(radian), 9.81f + fireStrength * Mathf.Sin(radian)));
