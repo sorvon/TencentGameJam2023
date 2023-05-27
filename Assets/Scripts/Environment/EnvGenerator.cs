@@ -64,7 +64,9 @@ public class EnvGenerator : Service
         currentType = EObject.Cloud;
         obstacleTypes = new List<EObject>()
         {
-            EObject.ThunderCloud
+            EObject.ThunderCloud,
+            EObject.LeftStick,
+            EObject.RightStick
         };
     }
 
@@ -117,7 +119,7 @@ public class EnvGenerator : Service
         float generateY, generateX;
         int tryCount = 0;
         EObject obstacleType = obstacleTypes[Random.Range(0, obstacleTypes.Count)];
-        lastObstaclePos = CurrentHeight;
+        
         
         if ((lastObstaclePos - CurrentHeight) > 0)
         {
@@ -141,7 +143,8 @@ public class EnvGenerator : Service
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25);
         }
-
+        
+        lastObstaclePos = CurrentHeight;
         if (tryCount >= 25)
         {
             Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的障碍物");
@@ -157,6 +160,9 @@ public class EnvGenerator : Service
             {
                 case EObject.LeftStick:
                     generateX = CameraLeft;
+                    break;
+                case EObject.RightStick:
+                    generateX = CameraRight;
                     break;
                 default:
                     generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
