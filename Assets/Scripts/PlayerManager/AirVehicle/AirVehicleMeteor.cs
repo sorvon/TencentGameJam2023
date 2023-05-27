@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AirVehicleMeteor : AirVehicleBase
 {
-    [Header("ĞÇĞÇÅäÖÃ")]
+    [Header("æ˜Ÿæ˜Ÿé…ç½®")]
     public float meteorStrength = 15;
     public float defauleVelocity_Y = 10;
 
