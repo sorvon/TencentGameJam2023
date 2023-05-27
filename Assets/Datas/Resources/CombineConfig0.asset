@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CombineConfig0
   m_EditorClassIdentifier: 
   obstacleInterval: 10
-  combineTypes: 05000000
+  combineTypes: 0800000007000000

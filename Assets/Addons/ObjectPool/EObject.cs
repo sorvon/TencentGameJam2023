@@ -34,6 +34,7 @@ namespace Services
         /// 右边伸出的树枝
         /// </summary>
         RightStick,
+        Combine1
         
         
     }

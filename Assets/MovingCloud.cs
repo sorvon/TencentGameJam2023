@@ -6,7 +6,7 @@ public class MovingCloud : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     
-    private Camera camera;
+    new private Camera camera;
     private Transform cameraTrans;
 
     private float CameraLeft => cameraTrans.position.x - camera.orthographicSize * camera.aspect;

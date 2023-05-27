@@ -1,0 +1,151 @@
+
+木鸟.png
+size: 3854,3854
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+b-arm 的複製
+  rotate: true
+  xy: 583, 3745
+  size: 107, 310
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+b-leg 的複製
+  rotate: true
+  xy: 1515, 3737
+  size: 115, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+chest 的複製
+  rotate: true
+  xy: 105, 3759
+  size: 93, 163
+  orig: 95, 165
+  offset: 1, 1
+  index: -1
+f-arm 的複製
+  rotate: true
+  xy: 270, 3747
+  size: 105, 311
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+f-leg 的複製
+  rotate: true
+  xy: 1017, 3738
+  size: 114, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+face 的複製
+  rotate: true
+  xy: 895, 3742
+  size: 110, 120
+  orig: 112, 122
+  offset: 1, 1
+  index: -1
+gadget1 的複製
+  rotate: false
+  xy: 23, 3832
+  size: 23, 20
+  orig: 26, 22
+  offset: 2, 1
+  index: -1
+hair 的複製
+  rotate: false
+  xy: 2463, 3703
+  size: 164, 149
+  orig: 166, 151
+  offset: 1, 1
+  index: -1
+neck 的複製
+  rotate: true
+  xy: 48, 3812
+  size: 40, 55
+  orig: 43, 57
+  offset: 1, 1
+  index: -1
+s-
+  rotate: true
+  xy: 2, 2805
+  size: 931, 1429
+  orig: 3240, 3240
+  offset: 1150, 89
+  index: -1
+s-2
+  rotate: false
+  xy: 1433, 1466
+  size: 2278, 1869
+  orig: 3240, 3240
+  offset: 481, 24
+  index: -1
+skirt 的複製
+  rotate: true
+  xy: 2905, 3613
+  size: 239, 301
+  orig: 239, 301
+  offset: 0, 0
+  index: -1
+tail 的複製
+  rotate: true
+  xy: 2629, 3672
+  size: 180, 274
+  orig: 180, 275
+  offset: 0, 1
+  index: -1
+yz
+  rotate: true
+  xy: 3208, 3337
+  size: 515, 644
+  orig: 3240, 3240
+  offset: 1256, 226
+  index: -1
+圖層 2 的複製
+  rotate: true
+  xy: 2, 3837
+  size: 15, 19
+  orig: 18, 21
+  offset: 1, 1
+  index: -1
+圖層gadget2-f 2 的複製
+  rotate: true
+  xy: 2013, 3724
+  size: 128, 223
+  orig: 130, 226
+  offset: 1, 1
+  index: -1
+圖層gadget2-f 2 的複製 2
+  rotate: true
+  xy: 2238, 3724
+  size: 128, 223
+  orig: 130, 226
+  offset: 1, 1
+  index: -1
+
+木鸟2.png
+size: 2983,2983
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+s-3
+  rotate: false
+  xy: 2, 865
+  size: 2979, 2116
+  orig: 3240, 3240
+  offset: 132, 184
+  index: -1
+
+木鸟3.png
+size: 3072,3072
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+插圖2
+  rotate: false
+  xy: 2, 931
+  size: 3068, 2139
+  orig: 3240, 3240
+  offset: 92, 1014
+  index: -1

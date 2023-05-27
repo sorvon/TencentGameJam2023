@@ -13,7 +13,7 @@ public class EnvGenerator : Service
     [Other] private ObjectManager objectManager;
     private Dictionary<EObject, Collection> collections;
     private Dictionary<EObject, List<float>> spawnPosDict;
-    private Camera camera;
+    new private Camera camera;
 
     private EObject currentType; //当前收集物的种类
     private List<EObject> combineTypes;
@@ -163,13 +163,11 @@ public class EnvGenerator : Service
         //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
         Collection co = collections[currentType];
         Transform combTrans = objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
-        if (!(Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
+        if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         {
-            combTrans.Find("Collection").gameObject.SetActive(false);
+            Transform coTrans = combTrans.Find("Collection");
+            objectManager.Activate(currentType, coTrans.position);
         }
-        else
-        {
-            co.lastPos = CurrentHeight;
-        }
+
     }
 }
