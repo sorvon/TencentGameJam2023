@@ -25,7 +25,7 @@ public class AirVehicleFireworks : AirVehicleBase
     void FixedUpdate()
     {
         float hAxis = Input.GetAxisRaw("Horizontal");
-        fireDirection = Mathf.Clamp(fireDirection - hAxis * directionSensitivity * Time.deltaTime, -45, 45);
+        fireDirection = Mathf.Clamp(fireDirection - hAxis * directionSensitivity * Time.deltaTime, -30, 30);
         transform.rotation = Quaternion.Euler(0, 0, fireDirection);
 
         if (Input.GetButton("Fire1")
@@ -39,7 +39,7 @@ public class AirVehicleFireworks : AirVehicleBase
         }
         else
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            //rb.velocity = new Vector2(0, rb.velocity.y);
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, -3, 0), Time.deltaTime);
         }
