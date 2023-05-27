@@ -14,10 +14,11 @@ public class EnvGenerator : Service
     private Dictionary<EObject, Collection> collections;
     private Dictionary<EObject, List<float>> spawnPosDict;
     private Camera camera;
+    
     private EObject currentType; //当前收集物的种类
-    private List<EObject> obstacleTypes;
-    private float lastObstaclePos = 0f;
-    private float obstacleInterval = 0f;
+    private List<EObject> combineTypes;
+    private float lastCombinePos = 0f;
+    private float combineInterval = 0f;
 
     #region 摄像机变量
 
@@ -31,6 +32,7 @@ public class EnvGenerator : Service
 
     #endregion
 
+    public int currentLevel = 0;
 
     protected override void Start()
     {
@@ -40,8 +42,8 @@ public class EnvGenerator : Service
 
     public void Update()
     {
-        GenerateCollection();
-        GenerateObstacle();
+        //GenerateCollection();
+        Generate();
     }
 
     private void Init()
@@ -53,21 +55,25 @@ public class EnvGenerator : Service
     private void InitGeneratorConfig()
     {
         collections = new Dictionary<EObject, Collection>();
-        CollectionGenerateInterval intervalData = Resources.Load<CollectionGenerateInterval>("CollectionIntervals");
-        foreach (var interval in intervalData._intervals)
+        CollectionGenerateInterval config = Resources.Load<CollectionGenerateInterval>("CollectionIntervals");
+        foreach (var interval in config._intervals)
         {
             Collection collection = new Collection(interval.type, interval.interval);
             collections.Add(interval.type, collection);
         }
-
-        obstacleInterval = intervalData.obstacleInterval;
         currentType = EObject.Cloud;
-        obstacleTypes = new List<EObject>()
+        ReadLevelConfig();
+    }
+
+    private void ReadLevelConfig()
+    {
+        CombineConfig config = Resources.Load<CombineConfig>($"CombineConfig{currentLevel}");
+        combineInterval = config.obstacleInterval;
+        combineTypes = new List<EObject>();
+        foreach (var comb in config.combineTypes)
         {
-            EObject.ThunderCloud,
-            EObject.LeftStick,
-            EObject.RightStick
-        };
+            combineTypes.Add(comb);
+        }
     }
 
     private void GenerateCollection()
@@ -111,25 +117,25 @@ public class EnvGenerator : Service
         objectManager.Activate(currentType, new Vector2(generateX, generateY));
     }
 
-    private void GenerateObstacle()
+    private void Generate()
     {
-        if (!(Mathf.Abs(lastObstaclePos - CurrentHeight) > obstacleInterval))
+        if (!(Mathf.Abs(lastCombinePos - CurrentHeight) > combineInterval))
             return;
         
         float generateY, generateX;
         int tryCount = 0;
-        EObject obstacleType = obstacleTypes[Random.Range(0, obstacleTypes.Count)];
+        EObject combination = combineTypes[Random.Range(0, combineTypes.Count)];
         
         
-        if ((lastObstaclePos - CurrentHeight) > 0)
+        if ((lastCombinePos - CurrentHeight) > 0)
         {
             // Debug.Log("DownGenerate");
             do
             {
                 tryCount++;
-                SwitchObstacleXPos(obstacleType);
+                generateX = cameraTrans.position.x;
                 generateY = Random.Range(CameraDown, SpawnDown);
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
+            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25); //防止卡死
         }
         else
@@ -138,36 +144,30 @@ public class EnvGenerator : Service
             do
             {
                 tryCount++;
-                SwitchObstacleXPos(obstacleType);
+                generateX = cameraTrans.position.x;
                 generateY = Random.Range(CameraUp, SpawnUp);
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
+            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25);
         }
         
-        lastObstaclePos = CurrentHeight;
+        lastCombinePos = CurrentHeight;
         if (tryCount >= 25)
         {
-            Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的障碍物");
+            Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的组合");
             return;
         }
-
         
-        objectManager.Activate(obstacleType, new Vector2(generateX, generateY));
-
-        void SwitchObstacleXPos(EObject type)
+        //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
+        Collection co = collections[currentType];
+        Transform combTrans =objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
+        if (!(Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         {
-            switch (obstacleType)
-            {
-                case EObject.LeftStick:
-                    generateX = CameraLeft;
-                    break;
-                case EObject.RightStick:
-                    generateX = CameraRight;
-                    break;
-                default:
-                    generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
-                    break;
-            }
+            combTrans.Find("Collection").gameObject.SetActive(false);
+            
+        }
+        else
+        {
+            co.lastPos = CurrentHeight;
         }
     }
 }
