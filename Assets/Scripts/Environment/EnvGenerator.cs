@@ -14,7 +14,7 @@ public class EnvGenerator : Service
     private Dictionary<EObject, Collection> collections;
     private Dictionary<EObject, List<float>> spawnPosDict;
     private Camera camera;
-    
+
     private EObject currentType; //当前收集物的种类
     private List<EObject> combineTypes;
     private float lastCombinePos = 0f;
@@ -27,8 +27,10 @@ public class EnvGenerator : Service
     private float CameraDown => cameraTrans.position.y - camera.orthographicSize;
     private float CameraLeft => cameraTrans.position.x - camera.orthographicSize * camera.aspect; //摄像机左边界
     private float CameraRight => cameraTrans.position.x + camera.orthographicSize * camera.aspect;
-    private float SpawnUp => CameraUp + 2 * camera.orthographicSize; //生成上边界：摄像机上边界+2个屏幕高度
-    private float SpawnDown => CameraDown - 2 * camera.orthographicSize;
+    private float SpawnUpDown => CameraUp + 0.25f * camera.orthographicSize; //生成上边界：摄像机上边界+2个屏幕高度
+    private float SpawnUpUp => CameraUp + 0.75f * camera.orthographicSize;
+    private float SpawnDownDown => CameraDown - 0.25f * camera.orthographicSize;
+    private float SpawnDownUp=>CameraDown - 0.75f * camera.orthographicSize;
 
     #endregion
 
@@ -61,6 +63,7 @@ public class EnvGenerator : Service
             Collection collection = new Collection(interval.type, interval.interval);
             collections.Add(interval.type, collection);
         }
+
         currentType = EObject.Cloud;
         ReadLevelConfig();
     }
@@ -91,7 +94,7 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
-                generateY = Random.Range(CameraDown, SpawnDown);
+                generateY = Random.Range(SpawnDownDown, SpawnDownUp);
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25); //防止卡死
         }
@@ -102,7 +105,7 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
-                generateY = Random.Range(CameraUp, SpawnUp);
+                generateY = Random.Range(SpawnUpDown, SpawnUpUp);
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25);
         }
@@ -121,12 +124,12 @@ public class EnvGenerator : Service
     {
         if (!(Mathf.Abs(lastCombinePos - CurrentHeight) > combineInterval))
             return;
-        
+
         float generateY, generateX;
         int tryCount = 0;
         EObject combination = combineTypes[Random.Range(0, combineTypes.Count)];
-        
-        
+
+
         if ((lastCombinePos - CurrentHeight) > 0)
         {
             // Debug.Log("DownGenerate");
@@ -134,7 +137,7 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = cameraTrans.position.x;
-                generateY = Random.Range(CameraDown, SpawnDown);
+                generateY = Random.Range(SpawnDownDown, SpawnDownUp);
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25); //防止卡死
         }
@@ -145,25 +148,24 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = cameraTrans.position.x;
-                generateY = Random.Range(CameraUp, SpawnUp);
+                generateY = Random.Range(SpawnUpDown, SpawnUpUp);
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25);
         }
-        
+
         lastCombinePos = CurrentHeight;
         if (tryCount >= 25)
         {
             Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的组合");
             return;
         }
-        
+
         //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
         Collection co = collections[currentType];
-        Transform combTrans =objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
+        Transform combTrans = objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
         if (!(Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         {
             combTrans.Find("Collection").gameObject.SetActive(false);
-            
         }
         else
         {
