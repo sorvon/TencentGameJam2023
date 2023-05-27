@@ -15,3 +15,5 @@ MonoBehaviour:
   datas:
   - eObject: 0
     prefab: {fileID: 5237948274055854843, guid: d303e2a4598ce3b43891b84fc753fa6e, type: 3}
+  - eObject: 5
+    prefab: {fileID: 1007852142120643248, guid: fc6e7de4954962c4c97d26c139a83a44, type: 3}
