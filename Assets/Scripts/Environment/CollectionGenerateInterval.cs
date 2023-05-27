@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CollectionIntervals", menuName = "CollectionIntervals", order = 1)]
 public class CollectionGenerateInterval: ScriptableObject
 {
-    public List<CollectionInterval> _intervals;
+    [Label("障碍物间隔")]public float obstacleInterval;
+    [Label("收集物间隔")]public List<CollectionInterval> _intervals;
 }
 
 [Serializable]

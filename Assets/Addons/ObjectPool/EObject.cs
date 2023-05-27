@@ -21,7 +21,20 @@ namespace Services
         /// <summary>
         /// 星星
         /// </summary>
-        Star
+        Star,
+        /// <summary>
+        /// 雷云
+        /// </summary>
+        ThunderCloud,
+        /// <summary>
+        /// 左边伸出的树枝
+        /// </summary>
+        LeftStick,
+        /// <summary>
+        /// 右边伸出的树枝
+        /// </summary>
+        RightStick,
+        
         
     }
 }
