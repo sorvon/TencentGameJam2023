@@ -33,7 +33,7 @@ public class AirVehicleFireworks : AirVehicleBase
             || Input.GetKey(KeyCode.A))
         {
             var radian = Mathf.Deg2Rad * (fireDirection + 90);
-            rb.AddForce(new Vector2(fireStrength * Mathf.Cos(radian), 9.81f + fireStrength * Mathf.Sin(radian)));
+            rb.AddForce(new Vector2(fireStrength * Mathf.Cos(radian), 9.81f * rb.gravityScale + fireStrength * Mathf.Sin(radian)));
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, 3, 0), Time.deltaTime);
         }

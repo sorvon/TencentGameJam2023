@@ -27,7 +27,7 @@ public class AirVehicleBalloon : AirVehicleBase
         if (Input.GetButton("Fire1"))
         {
             currentFuel -= Time.deltaTime;
-            rb.AddForce(new Vector2(0, balloonStrength + 9.81f));
+            rb.AddForce(new Vector2(0, balloonStrength + 9.81f * rb.gravityScale));
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, 3, 0), Time.deltaTime);
             fireObject.SetActive(true);
