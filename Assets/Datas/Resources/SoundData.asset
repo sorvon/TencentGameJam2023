@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36eb59308c507648ba9218b190f551b, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  soundGroups: []
+  soundGroups:
+  - groupType: 0
+    sounds:
+    - name: testaudio1
+      audioClip: {fileID: 8300000, guid: 3d8fb38d01c982845b104ebfc0ca8c7f, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 0
+      pitch: 1
+  - groupType: 1
+    sounds:
+    - name: testaudio2
+      audioClip: {fileID: 8300000, guid: 5f9fed2a08fa0f349989e61a3500e87c, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 0
+      pitch: 1
