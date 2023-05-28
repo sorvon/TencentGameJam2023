@@ -24,6 +24,10 @@ public class AirVehicleMeteor : AirVehicleBase
     }
     private void OnEnable()
     {
+        if (!audioManager)
+        {
+            audioManager = Services.ServiceLocator.Get<AudioManager>();
+        }
         audioManager.PlaySound("Meteor");
     }
     void FixedUpdate()
