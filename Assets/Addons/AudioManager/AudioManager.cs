@@ -160,6 +160,18 @@ public class AudioManager : Service
                 else
                     StartCoroutine(StopSmoothly(audioSource));
     }
+    public void PauseSound(string name)
+    {
+        if (!soundDics.ContainsKey(name))
+        {
+            Debug.LogWarning($"音频{name}不存在!");
+            return;
+        }
+        foreach (var audioSource in soundDics[name].audioSources)
+            if (audioSource.isPlaying)
+                audioSource.Pause();
+
+    }
 
     public void MuteGroup(ESoundGroup groupType)
     {
