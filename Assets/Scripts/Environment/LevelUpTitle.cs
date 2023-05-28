@@ -23,12 +23,12 @@ public class LevelUpTitle : MonoBehaviour
         title.gameObject.SetActive(false);
         level2title = new Dictionary<int, string>()
         {
-            { 0, "雏鸟" },
-            { 1, "腾飞" },
-            { 2, "飞升" },
-            { 3, "宏愿" },
-            {4,"四四"},
-            {5,"五五"}
+            { 0, "勇气" },
+            { 1, "雏鸟" },
+            { 2, "展翼" },
+            { 3, "飞升" },
+            { 4, "遥愿" },
+            { 5, "团圆" }
         };
         LevelManager.OnLevelUpInt += OnLevelUp;
     }
