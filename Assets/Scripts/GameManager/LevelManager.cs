@@ -27,13 +27,13 @@ public class LevelManager : Service
                 return;
            
             collectionCount = value;
-            UpdateCollectionText();
             if (collectionCount >= collectionCountConfig[Level])
             {
                 Level++;
                 collectionCount = 0;
             }
-            
+            UpdateCollectionText();
+
         }
     }
 

@@ -62,39 +62,6 @@ public class PlayerManager : MonoBehaviour
         {
             collision.GetComponent<Services.IMyObject>().Recycle();
             levelManager.CollectionCount++;
-            // if (airVehicleIndex < collectionCountConfig.Length)
-            // {
-            //     // collectionCount++;
-            //     
-            //     if (collectionCount == collectionCountConfig[airVehicleIndex])
-            //     {
-            //         
-            //         // airVehicleIndex++;
-            //         for (int i = 0; i < airVehicleList.Length; i++)
-            //         {
-            //             if (i == CurrentLevel)
-            //             {
-            //                 currentAirVehicle = airVehicleList[i];
-            //             }
-            //             airVehicleList[i].SetActive(i == CurrentLevel);
-            //         }
-            //     }
-            //     if (airVehicleIndex < collectionCountConfig.Length)
-            //     {
-            //         if (collectNumberText != null)
-            //         {
-            //             collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
-            //         }
-            //     }
-            //     else
-            //     {
-            //         if (collectNumberText != null)
-            //         {
-            //             collectNumberText.text = $"{collectionCount}";
-            //         }
-            //     }
-            // }
-            
         }
         if (collision.CompareTag("Obstacle") && !isInvincible)
         {
