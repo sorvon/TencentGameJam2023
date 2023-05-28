@@ -12,10 +12,14 @@ public class AirVehicleBalloon : AirVehicleBase
     [SerializeField] CinemachineVirtualCamera vcam;
     [SerializeField] GameObject fireObject;
 
-    [Header("Debug")]
+    [Header("Hard Mode")]
     public bool isHard = false;
     public float hardHorizontalStrength = 5;
     public float hardHorizontalInterval = 1;
+
+    [Header("Debug")]
+    [SerializeField] float hardACount = 0;
+    [SerializeField] float hardDCount = 0;
     SkeletonAnimation ska;
 
     CinemachineFramingTransposer vcamTransposer;
@@ -27,6 +31,10 @@ public class AirVehicleBalloon : AirVehicleBase
         currentFuel = maxFuel;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
+        
+    }
+    private void Start()
+    {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 
@@ -37,14 +45,44 @@ public class AirVehicleBalloon : AirVehicleBase
             var hAxis = Input.GetAxisRaw("Horizontal");
             hAxis = -hAxis;
             hardHorizontalIntervalCount += Time.deltaTime;
-            if (hAxis != 0 && hardHorizontalIntervalCount >= hardHorizontalInterval)
+            //if (hAxis != 0 && hardHorizontalIntervalCount >= hardHorizontalInterval)
+            //{
+            //    hardHorizontalIntervalCount = 0;
+            //    rb.velocity = new Vector2(hAxis * hardHorizontalStrength, rb.velocity.y);
+            //    transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? -180 : 0, 0));
+            //    transform.DOKill();
+            //    transform.DOShakeRotation(4, 10, 5, 90, true, ShakeRandomnessMode.Harmonic);
+            //}
+
+            if (Input.GetKey(KeyCode.A))
             {
-                hardHorizontalIntervalCount = 0;
-                rb.velocity = new Vector2(hAxis * hardHorizontalStrength, rb.velocity.y);
-                transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? -180 : 0, 0));
-                transform.DOKill();
-                transform.DOShakeRotation(4, 15);
+                hardACount += Time.deltaTime * 2;
             }
+            else if(Input.GetKey(KeyCode.D))
+            {
+                hardDCount += Time.deltaTime * 2;
+            }
+            if (Input.GetKeyUp(KeyCode.A) && hardHorizontalIntervalCount >= hardHorizontalInterval)
+            {
+                hardACount = Mathf.Clamp(hardACount, 1, 3);
+                rb.velocity = new Vector2(hardACount * hardHorizontalStrength, rb.velocity.y);
+                transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+                transform.DOKill();
+                transform.DOShakeRotation(4, 10, 5, 90, true, ShakeRandomnessMode.Harmonic);
+                hardACount = 0;
+                hardHorizontalIntervalCount = 0;
+            }
+            else if(Input.GetKeyUp(KeyCode.D) && hardHorizontalIntervalCount >= hardHorizontalInterval)
+            {
+                hardDCount = Mathf.Clamp(hardDCount, 1, 3);
+                rb.velocity = new Vector2(-hardDCount * hardHorizontalStrength, rb.velocity.y);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                transform.DOKill();
+                transform.DOShakeRotation(4, 10, 5, 90, true, ShakeRandomnessMode.Harmonic);
+                hardDCount = 0;
+                hardHorizontalIntervalCount = 0;
+            }
+            
         }
     }
     // Update is called once per frame
@@ -75,7 +113,7 @@ public class AirVehicleBalloon : AirVehicleBase
         {
             if (ska.AnimationName != "ÏÂÂä")
             {
-                audioManager.StopSound("Fire");
+                audioManager.PauseSound("Fire");
                 ska.AnimationState.SetAnimation(0, "ÏÂÂä", true);
             }
             currentFuel = Mathf.Clamp(currentFuel + Time.deltaTime, -1000, maxFuel);

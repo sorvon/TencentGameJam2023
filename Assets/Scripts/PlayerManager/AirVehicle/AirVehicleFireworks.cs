@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +30,6 @@ public class AirVehicleFireworks : AirVehicleBase
     {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -59,7 +57,7 @@ public class AirVehicleFireworks : AirVehicleBase
             //rb.velocity = new Vector2(0, rb.velocity.y);
             if (ska.AnimationName != "drop")
             {
-                audioManager.StopSound("Fireworks");
+                audioManager.PauseSound("Fireworks");
                 particle.Stop(true);
                 ska.AnimationState.SetAnimation(0, "drop", true);
             }
@@ -70,7 +68,6 @@ public class AirVehicleFireworks : AirVehicleBase
 
     private void OnDisable()
     {
-        if(audioManager)
-            audioManager.StopSound("Fireworks");
+        audioManager.StopSound("Fireworks");
     }
 }
