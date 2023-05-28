@@ -104,6 +104,7 @@ public class AudioManager : Service
             Debug.LogWarning($"音频{name}不存在!");
             return;
         }
+
         Sound curSound = soundDics[name];
         List<AudioSource> curSources = soundDics[name].audioSources;
         switch (mode)
@@ -115,11 +116,12 @@ public class AudioManager : Service
             case AudioPlayMode.Interrupt:
                 FixedPlay(curSources[0]);
                 break;
-            case AudioPlayMode.Plenty:  
+            case AudioPlayMode.Plenty:
                 if (plentyWaitTime > 0 && Time.time - curSound.lastPlayTime < plentyWaitTime)
                 {
                     return;
                 }
+
                 curSound.lastPlayTime = Time.time;
                 foreach (var source in curSources)
                 {
@@ -128,8 +130,10 @@ public class AudioManager : Service
                         FixedPlay(source);
                         return;
                     }
+
                     Debug.Log($"{source.gameObject.name}正在播放");
                 }
+
                 //若遍历完还没有空余的AudioSource则新建一个AudioSource
                 GameObject newSourceObj = new GameObject($"{curSound.name}{curSources.Count + 1}");
                 AudioSource newSource = newSourceObj.AddComponent<AudioSource>();
@@ -153,13 +157,17 @@ public class AudioManager : Service
             Debug.LogWarning($"音频{name}不存在!");
             return;
         }
+
         foreach (var audioSource in soundDics[name].audioSources)
             if (audioSource.isPlaying)
                 if (!smoothly)
                     audioSource.Stop();
                 else
+                {
                     StartCoroutine(StopSmoothly(audioSource));
+                }
     }
+
     public void PauseSound(string name)
     {
         if (!soundDics.ContainsKey(name))
@@ -167,10 +175,10 @@ public class AudioManager : Service
             Debug.LogWarning($"音频{name}不存在!");
             return;
         }
+
         foreach (var audioSource in soundDics[name].audioSources)
             if (audioSource.isPlaying)
                 audioSource.Pause();
-
     }
 
     public void MuteGroup(ESoundGroup groupType)
@@ -180,6 +188,7 @@ public class AudioManager : Service
             Debug.LogError($"不存在该音频组!");
             return;
         }
+
         foreach (var sound in soundGroupDics[groupType])
         {
             foreach (var audioSource in sound.audioSources)
@@ -189,19 +198,20 @@ public class AudioManager : Service
 
     private IEnumerator StopSmoothly(AudioSource audioSource)
     {
-        
         float originVolume = audioSource.volume;
         if (originVolume <= 0)
         {
             //Debug.Log(audioSource.name+"exit");
             yield break;
         }
+
         for (int i = 1; i <= 10; i++)
         {
             //Debug.Log(audioSource.name+":"+audioSource.volume.ToString());
             audioSource.volume -= originVolume / 10f;
             yield return new WaitForSecondsRealtime(0.05f);
         }
+
         audioSource.Stop();
         audioSource.volume = originVolume;
     }
@@ -213,6 +223,7 @@ public class AudioManager : Service
             Debug.LogError($"不存在该音频组!");
             return;
         }
+
         foreach (var sound in soundGroupDics[groupType])
         {
             float final =
@@ -230,6 +241,7 @@ public class AudioManager : Service
             Debug.LogError($"不存在该音频组!");
             return;
         }
+
         if (value > 1 || value < 0)
             Debug.LogError($"设置音量{value}不合法!");
         foreach (var sound in soundGroupDics[groupType])
@@ -242,6 +254,7 @@ public class AudioManager : Service
             foreach (var audioSource in sound.audioSources)
                 audioSource.volume = final;
         }
+
         groupVolumeBeforeMuted[groupType] = value;
     }
 
@@ -252,6 +265,7 @@ public class AudioManager : Service
             Debug.LogError($"不存在该音频组!");
             return;
         }
+
         foreach (var sound in soundGroupDics[groupType])
         {
             foreach (var audioSource in sound.audioSources)

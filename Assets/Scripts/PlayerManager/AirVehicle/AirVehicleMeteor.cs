@@ -44,6 +44,7 @@ public class AirVehicleMeteor : AirVehicleBase
 
     private void OnDisable()
     {
-        audioManager.StopSound("Meteor");
+        if(audioManager)
+            audioManager.StopSound("Meteor");
     }
 }
