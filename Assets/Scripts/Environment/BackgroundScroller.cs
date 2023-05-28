@@ -84,7 +84,7 @@ public class BackgroundScroller : Service
             var height = transHeight[i];
             if (Mathf.Abs(unit.mtransform.position.y - height) <= CameraSize / 3f)
             {
-                Debug.Log($"{unit.mtransform.name}切换为过渡图{i}  {unit.mtransform.position.y }" );
+                // Debug.Log($"{unit.mtransform.name}切换为过渡图{i}  {unit.mtransform.position.y }" );
                 unit.ChangeState(true, i);
                 return;
             }
@@ -95,7 +95,7 @@ public class BackgroundScroller : Service
             var height = transHeight[i];
             if(unit.mtransform.position.y>=height)
             {
-                Debug.Log($"{unit.mtransform.name}切换到正常图{i+1} {unit.mtransform.position.y }");
+                // Debug.Log($"{unit.mtransform.name}切换到正常图{i+1} {unit.mtransform.position.y }");
                 unit.ChangeState(false, i+1);
                 return;
             }
