@@ -85,7 +85,7 @@ public class LevelManager : Service
     {
         // if (!heightNumberText)
         //     return;
-        Debug.Log( $"{Height:N}");
+      //  Debug.Log( $"{Height:N}");
         heightNumberText.text = $"{Height:N}";
     }
 
