@@ -10,12 +10,14 @@ public class XiaDebug : MonoBehaviour
     new private Camera camera;
     private Transform cameraTrans;
     private GameManager manager;
+    private LevelManager levelManager;
     private EnvGenerator generator; 
     private void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraTrans = camera.transform;
         manager = ServiceLocator.Get<GameManager>();
+        levelManager = ServiceLocator.Get<LevelManager>();
         generator = ServiceLocator.Get<EnvGenerator>();
     }
 
@@ -37,7 +39,7 @@ public class XiaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            generator.LevelUp();
+            levelManager.LevelUp();
         }
     }
 }

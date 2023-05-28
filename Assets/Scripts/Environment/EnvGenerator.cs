@@ -11,12 +11,13 @@ public class EnvGenerator : Service
 
 
     [Other] private ObjectManager objectManager;
+    [Other] private LevelManager levelManager;
     private Dictionary<EObject, Collection> collections;
     private Dictionary<int, EObject> level2collection;
 
     new private Camera camera;
 
-    private EObject currentType; //当前收集物的种类
+    private EObject currentType => level2collection[currentLevel]; //当前收集物的种类
     private List<EObject> combineTypes;
     private float lastCombinePos = 0f;
     private float combineInterval = 0f;
@@ -31,11 +32,11 @@ public class EnvGenerator : Service
     private float SpawnUpDown => CameraUp + 0.25f * camera.orthographicSize; //生成上边界：摄像机上边界+2个屏幕高度
     private float SpawnUpUp => CameraUp + 0.75f * camera.orthographicSize;
     private float SpawnDownDown => CameraDown - 0.25f * camera.orthographicSize;
-    private float SpawnDownUp=>CameraDown - 0.75f * camera.orthographicSize;
+    private float SpawnDownUp => CameraDown - 0.75f * camera.orthographicSize;
 
     #endregion
 
-    public int currentLevel = 0;
+    public int currentLevel => levelManager.Level;
 
     protected override void Start()
     {
@@ -53,6 +54,8 @@ public class EnvGenerator : Service
     {
         camera = cameraTrans.GetComponent<Camera>();
         InitGeneratorConfig();
+
+        levelManager.OnLevelUp += ReadLevelConfig;
     }
 
     private void InitGeneratorConfig()
@@ -64,7 +67,7 @@ public class EnvGenerator : Service
             Collection collection = new Collection(interval.type, interval.interval);
             collections.Add(interval.type, collection);
         }
-        
+
         level2collection = new Dictionary<int, EObject>()
         {
             { 0, EObject.Kite },
@@ -73,12 +76,15 @@ public class EnvGenerator : Service
             { 3, EObject.Kindling },
             { 4, EObject.Star }
         };
-        currentType = level2collection[0];
+        // currentType = level2collection[0];
         ReadLevelConfig();
     }
 
     private void ReadLevelConfig()
     {
+        //TODO: 等配置
+        if(currentLevel>2)
+            return;
         CombineConfig config = Resources.Load<CombineConfig>($"CombineConfig{currentLevel}");
         combineInterval = config.obstacleInterval;
         combineTypes = new List<EObject>();
@@ -86,47 +92,6 @@ public class EnvGenerator : Service
         {
             combineTypes.Add(comb);
         }
-    }
-
-    private void GenerateCollection()
-    {
-        Collection co = collections[currentType];
-        if (!(Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
-            return;
-
-        float generateY, generateX;
-        int tryCount = 0;
-        if ((co.lastPos - CurrentHeight) > 0)
-        {
-            // Debug.Log("DownGenerate");
-            do
-            {
-                tryCount++;
-                generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
-                generateY = Random.Range(SpawnDownDown, SpawnDownUp);
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
-                     tryCount < 25); //防止卡死
-        }
-        else
-        {
-            // Debug.Log("UpGenerate");
-            do
-            {
-                tryCount++;
-                generateX = Random.Range(CameraLeft * 0.9f, CameraRight * 0.9f);
-                generateY = Random.Range(SpawnUpDown, SpawnUpUp);
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 2.5f, LayerMask.GetMask("EnvItem")) &&
-                     tryCount < 25);
-        }
-
-        if (tryCount >= 25)
-        {
-            Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的收集物");
-        }
-
-        co.lastPos = CurrentHeight;
-
-        objectManager.Activate(currentType, new Vector2(generateX, generateY));
     }
 
     private void Generate()
@@ -175,21 +140,14 @@ public class EnvGenerator : Service
         if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         {
             Transform coTrans = combTrans.Find("Collection");
-            if(coTrans)
+            if (coTrans)
                 objectManager.Activate(currentType, coTrans.position);
         }
-
     }
 
-    public void LevelUp()
-    {
-        if (currentLevel >= 2)
-        {
-            Debug.LogWarning($"当前已达最高等级{currentLevel}，仍触发了LevelUp");
-            return;
-        }
-        currentLevel++;
-        currentType = level2collection[currentLevel];
-        ReadLevelConfig();
-    }
+    // public void LevelUp(int level)
+    // {
+    //     // currentType = level2collection[currentLevel];
+    //     ReadLevelConfig();
+    // }
 }

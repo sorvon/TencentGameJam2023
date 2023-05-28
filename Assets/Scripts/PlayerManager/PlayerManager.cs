@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
 using TMPro;
 using Spine.Unity;
@@ -18,9 +20,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     int collectionCount = 0;//
     bool isInvincible = false;
+    private LevelManager levelManager;
+    private int CurrentLevel => levelManager.Level;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
         for (int i = 0; i < airVehicleList.Length; i++)
         {
             if (i == airVehicleIndex)
@@ -31,16 +36,23 @@ public class PlayerManager : MonoBehaviour
         }
         if (collectNumberText != null)
         {
-            collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+            collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
         }
     }
+
+    private void Start()
+    {
+        levelManager = ServiceLocator.Get<LevelManager>();
+        levelManager.OnLevelUpInt += OnLevelUp;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (heightNumberText != null)
-        {
-            heightNumberText.text = string.Format("{0:N}", transform.position.y);
-        }
+        // if (heightNumberText != null)
+        // {
+        //     heightNumberText.text = $"{transform.position.y:N}";
+        // }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,47 +61,50 @@ public class PlayerManager : MonoBehaviour
         if (collision.CompareTag("Collection"))
         {
             collision.GetComponent<Services.IMyObject>().Recycle();
-            if (airVehicleIndex < collectionCountConfig.Length)
-            {
-                collectionCount++;
-                if (collectionCount == collectionCountConfig[airVehicleIndex])
-                {
-                    collectionCount = 0;
-                    airVehicleIndex++;
-                    for (int i = 0; i < airVehicleList.Length; i++)
-                    {
-                        if (i == airVehicleIndex)
-                        {
-                            currentAirVehicle = airVehicleList[i];
-                        }
-                        airVehicleList[i].SetActive(i == airVehicleIndex);
-                    }
-                }
-                if (airVehicleIndex < collectionCountConfig.Length)
-                {
-                    if (collectNumberText != null)
-                    {
-                        collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
-                    }
-                }
-                else
-                {
-                    if (collectNumberText != null)
-                    {
-                        collectNumberText.text = string.Format("{0}", collectionCount);
-                    }
-                }
-            }
+            levelManager.CollectionCount++;
+            // if (airVehicleIndex < collectionCountConfig.Length)
+            // {
+            //     // collectionCount++;
+            //     
+            //     if (collectionCount == collectionCountConfig[airVehicleIndex])
+            //     {
+            //         
+            //         // airVehicleIndex++;
+            //         for (int i = 0; i < airVehicleList.Length; i++)
+            //         {
+            //             if (i == CurrentLevel)
+            //             {
+            //                 currentAirVehicle = airVehicleList[i];
+            //             }
+            //             airVehicleList[i].SetActive(i == CurrentLevel);
+            //         }
+            //     }
+            //     if (airVehicleIndex < collectionCountConfig.Length)
+            //     {
+            //         if (collectNumberText != null)
+            //         {
+            //             collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
+            //         }
+            //     }
+            //     else
+            //     {
+            //         if (collectNumberText != null)
+            //         {
+            //             collectNumberText.text = $"{collectionCount}";
+            //         }
+            //     }
+            // }
             
         }
         if (collision.CompareTag("Obstacle") && !isInvincible)
         {
             rb.velocity = Vector2.zero;
-            collectionCount = Mathf.Max(collectionCount - 1, 0);
-            if (collectNumberText != null)
-            {
-                collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
-            }
+            // collectionCount = Mathf.Max(collectionCount - 1, 0);
+            levelManager.CollectionCount--;
+            // if (collectNumberText != null)
+            // {
+            //     collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
+            // }
             if (currentAirVehicle.TryGetComponent(out SkeletonAnimation ska))
             {
                 StartCoroutine(SpineSkeletonFlash(ska));
@@ -113,5 +128,18 @@ public class PlayerManager : MonoBehaviour
         }
         skeletonAnimation.skeleton.A = 1;
         isInvincible = false;
+    }
+
+    private void OnLevelUp(int level)
+    {
+        Debug.Log($"升级，当前等级{level}");
+        for (int i = 0; i < airVehicleList.Length; i++)
+        {
+            if (i == CurrentLevel)
+            {
+                currentAirVehicle = airVehicleList[i];
+            }
+            airVehicleList[i].SetActive(i == CurrentLevel);
+        }
     }
 }
