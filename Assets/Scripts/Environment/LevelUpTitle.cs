@@ -27,10 +27,11 @@ public class LevelUpTitle : MonoBehaviour
             { 1, "腾飞" },
             { 2, "飞升" },
             { 3, "宏愿" },
-            {4,"四四"},
-            {5,"五五"}
+            {4,""},
+            {5,"团圆"}
         };
         LevelManager.OnLevelUpInt += OnLevelUp;
+        OnLevelUp(0);
     }
 
     public void OnLevelUp(int level)
@@ -48,6 +49,7 @@ public class LevelUpTitle : MonoBehaviour
         {
             title.color = new Color(1, 1, 1, timer / enterTime);
             yield return new WaitForFixedUpdate();
+            timer += Time.deltaTime;
         }
         title.color = Color.white;
         yield return new WaitForSecondsRealtime(stopTime);
@@ -56,6 +58,7 @@ public class LevelUpTitle : MonoBehaviour
         {
             title.color = new Color(1, 1, 1, 1-timer / exitTime);
             yield return new WaitForFixedUpdate();
+            timer += Time.deltaTime;
         }
 
         title.color = new Color(1, 1, 1, 0);

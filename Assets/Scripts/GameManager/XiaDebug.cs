@@ -17,7 +17,7 @@ public class XiaDebug : MonoBehaviour
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraTrans = camera.transform;
-        manager = ServiceLocator.Get<GameManager>();
+        // manager = ServiceLocator.Get<GameManager>();
         levelManager = ServiceLocator.Get<LevelManager>();
         generator = ServiceLocator.Get<EnvGenerator>();
         audiomanager = ServiceLocator.Get<AudioManager>();
@@ -36,7 +36,7 @@ public class XiaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            manager.RestartGame();
+            // manager.RestartGame();
         }
 
         if (Input.GetKeyDown(KeyCode.L))
