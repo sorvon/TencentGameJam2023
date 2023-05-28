@@ -23,3 +23,5 @@ MonoBehaviour:
     interval: 20
   - type: 4
     interval: 20
+  - type: 4
+    interval: 20

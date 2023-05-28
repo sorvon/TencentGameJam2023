@@ -65,7 +65,11 @@ public class EnvGenerator : Service
         foreach (var interval in config._intervals)
         {
             Collection collection = new Collection(interval.type, interval.interval);
-            collections.Add(interval.type, collection);
+            if (! collections.ContainsKey(interval.type))
+            {
+                collections.Add(interval.type, collection);
+            }
+            
         }
 
         level2collection = new Dictionary<int, EObject>()
@@ -74,7 +78,8 @@ public class EnvGenerator : Service
             { 1, EObject.Feather },
             { 2, EObject.Firecracker },
             { 3, EObject.Kindling },
-            { 4, EObject.Star }
+            { 4, EObject.Star },
+            { 5, EObject.Star }
         };
         // currentType = level2collection[0];
         ReadLevelConfig();

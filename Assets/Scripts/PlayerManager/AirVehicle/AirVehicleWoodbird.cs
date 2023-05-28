@@ -11,6 +11,9 @@ public class AirVehicleWoodbird : AirVehicleBase
 
     [Header("Debug")]
     SkeletonAnimation ska;
+    public bool isHard = false;
+    [SerializeField] float hardHorizontalStrength = 5;
+    [SerializeField] float hardHorizontalInterval = 1;
 
     Spine.AnimationState.TrackEntryDelegate cc;
     float flyIntervalCount = 0;
@@ -22,22 +25,44 @@ public class AirVehicleWoodbird : AirVehicleBase
 
     void Update()
     {
-        HorizontalMove();
-        flyIntervalCount += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
+        if (isHard)
         {
-            ska.AnimationState.ClearTracks();
-            ska.AnimationState.SetAnimation(0, "ÆËÒí", false);
-            flyEnd = false;
-            cc = delegate
+            var hAxis = Input.GetAxisRaw("Horizontal");
+            flyIntervalCount += Time.deltaTime;
+            if (hAxis != 0 && flyIntervalCount >= hardHorizontalInterval)
             {
-                flyEnd = true;
-                ska.AnimationState.Complete -= cc;
-            };
-            ska.AnimationState.Complete += cc;
-            flyIntervalCount = 0;
-            rb.velocity = new Vector2(rb.velocity.x, flyStrength);
+                flyIntervalCount = 0;
+                ska.AnimationState.SetAnimation(0, "ÆËÒí", false);
+                flyEnd = false;
+                cc = delegate
+                {
+                    flyEnd = true;
+                    ska.AnimationState.Complete -= cc;
+                };
+                ska.AnimationState.Complete += cc;
+                rb.velocity = new Vector2(hAxis * hardHorizontalStrength, flyStrength);
+                transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? 0:-180, 0));
+            }
         }
+        else
+        {
+            HorizontalMove();
+            flyIntervalCount += Time.deltaTime;
+            if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
+            {
+                ska.AnimationState.SetAnimation(0, "ÆËÒí", false);
+                flyEnd = false;
+                cc = delegate
+                {
+                    flyEnd = true;
+                    ska.AnimationState.Complete -= cc;
+                };
+                ska.AnimationState.Complete += cc;
+                flyIntervalCount = 0;
+                rb.velocity = new Vector2(rb.velocity.x, flyStrength);
+            }
+        }
+        
     }
 
     private void FixedUpdate()
@@ -48,6 +73,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 if (ska.AnimationName != "»¬Ïè")
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, flyStrength / 5);
                     ska.AnimationState.SetAnimation(0, "»¬Ïè", true);
                 }
                 rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(maxVelocity_Y, rb.velocity.y));
@@ -56,7 +82,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 if (ska.AnimationName != "ÏÂ×¹")
                 {
-                    ska.AnimationState.SetAnimation(0, "ÏÂ×¹", true);
+                    ska.AnimationState.SetAnimation(0, "ÏÂ×¹", false);
                 }
             }
         }

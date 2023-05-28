@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
+using Spine.Unity;
 public class AirVehicleFireworks : AirVehicleBase
 {
 
     [Header("—Ãª≈‰÷√")]
     public float fireStrength = 20;
     public float directionSensitivity = 60;
+    [SerializeField] ParticleSystem particle;
     [SerializeField] CinemachineVirtualCamera vcam;
 
     [Header("Debug")]
     [SerializeField] float fireDirection;
     CinemachineFramingTransposer vcamTransposer;
+    SkeletonAnimation ska;
     // Start is called before the first frame update
     void Awake()
     {
         fireDirection = 0;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        ska = GetComponent<SkeletonAnimation>();
     }
 
     // Update is called once per frame
@@ -32,6 +35,11 @@ public class AirVehicleFireworks : AirVehicleBase
             || Input.GetKey(KeyCode.D)
             || Input.GetKey(KeyCode.A))
         {
+            if (ska.AnimationName != "∑…")
+            {
+                particle.Play();
+                ska.AnimationState.SetAnimation(0, "∑…", true);
+            }
             var radian = Mathf.Deg2Rad * (fireDirection + 90);
             rb.AddForce(new Vector2(fireStrength * Mathf.Cos(radian), 9.81f * rb.gravityScale + fireStrength * Mathf.Sin(radian)));
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
@@ -40,6 +48,11 @@ public class AirVehicleFireworks : AirVehicleBase
         else
         {
             //rb.velocity = new Vector2(0, rb.velocity.y);
+            if (ska.AnimationName != "drop")
+            {
+                particle.Stop(true);
+                ska.AnimationState.SetAnimation(0, "drop", true);
+            }
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, -3, 0), Time.deltaTime);
         }

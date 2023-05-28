@@ -27,13 +27,13 @@ public class LevelManager : Service
                 return;
            
             collectionCount = value;
-            UpdateCollectionText();
-            if (collectionCount >= collectionCountConfig[Level])
+            if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
                 Level++;
                 collectionCount = 0;
             }
-            
+            UpdateCollectionText();
+
         }
     }
 
@@ -47,12 +47,13 @@ public class LevelManager : Service
         get { return level; }
         private set
         {
-            if (value == level || value >= collectionCountConfig.Count - 1)
+            if (value == level || value > collectionCountConfig.Count )
                 return;
             level = value;
             OnLevelUpInt?.Invoke(level);
             OnLevelUp?.Invoke();
-            
+            UpdateCollectionText();
+
         }
     }
 
@@ -85,7 +86,7 @@ public class LevelManager : Service
     {
         // if (!heightNumberText)
         //     return;
-      //  Debug.Log( $"{Height:N}");
+        //Debug.Log( $"{Height:N}");
         heightNumberText.text = $"{Height:N}";
     }
 
@@ -93,7 +94,15 @@ public class LevelManager : Service
     {
         if (!collectNumberText)
             return;
-        collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+        if (Level < collectionCountConfig.Count)
+        {
+            collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+        }
+        else
+        {
+            collectNumberText.text = $"{collectionCount}";
+        }
+        
     }
 
     /// <summary>
