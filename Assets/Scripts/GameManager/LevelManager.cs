@@ -65,6 +65,23 @@ public class LevelManager : Service
 
     public float Height =>playerManager. transform.position.y;
 
+    private int heightLevel;
+    public int HeightLevel
+    {
+        get
+        {
+            return heightLevel;
+        }
+        set
+        {
+            if(value<=heightLevel)
+                return;
+            heightLevel = value;
+            OnHeightLevelInt?.Invoke(value);
+            Debug.Log($"当前海拔等级来到{value}");
+        }
+    }
+
     /// <summary>
     /// 无参数的升级事件
     /// </summary>
@@ -74,6 +91,8 @@ public class LevelManager : Service
     /// 有参数的升级事件
     /// </summary>
     public UnityAction<int> OnLevelUpInt;
+
+    public UnityAction<int> OnHeightLevelInt;
 
     protected override void Start()
     {

@@ -7,41 +7,45 @@ public class BGMController : MonoBehaviour
 {
     private EventSystem eventSystem;
     private AudioManager audioManager;
+    private LevelManager levelManager;
 
     private void Start()
     {
-        // eventSystem = ServiceLocator.Get<EventSystem>();
         audioManager = ServiceLocator.Get<AudioManager>();
-
-        //eventSystem.AddListener<int>(EEvent.AfterLoadScene, PlayBGMAfterLoadingScene);
-        //audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
+        levelManager = ServiceLocator.Get<LevelManager>();
+        levelManager.OnHeightLevelInt += PlayBGMOnLevelUp;
+        audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
     }
+    
 
-    private void PlayBGMAfterLoadingScene(int index)
+    private void PlayBGMOnLevelUp(int level)
     {
         audioManager.StopGroup(ESoundGroup.BGM,true);
-        switch (index)
+        if (level < 1 || level > 3)
         {
-            case 1:
-                audioManager.PlaySound("MainMenu");
-                break;
-            case 2:
-                audioManager.PlaySound("FightBGM");
-                break;
-            default:
-                Debug.LogError($"BGMController中加载场景序号{index}未知");
-                break;
+            Debug.LogWarning($"播放音频时海拔等级{level}超出序列");
+            return;
         }
+        audioManager.PlaySound($"Level{level}BGM");
+
     }
 
-    public void PlayerDie()
+    public void PlayStartFilmBGM()
     {
-        //Debug.Log("here");
         audioManager.StopGroup(ESoundGroup.BGM,true);
-        audioManager.PlaySound("PlayerDieBGM");
+        audioManager.PlaySound("StartFilmBGM");
     }
-    public void Success(){
+
+    public void PlayEndFilmBGM()
+    {
         audioManager.StopGroup(ESoundGroup.BGM,true);
-        audioManager.PlaySound("SuccessBGM");
+        audioManager.PlaySound("EndFilmBGM");
     }
+
+    public void StartGameBGM()
+    {
+        audioManager.StopGroup(ESoundGroup.BGM,true);
+        audioManager.PlaySound("Level0BGM");
+    }
+    
 }

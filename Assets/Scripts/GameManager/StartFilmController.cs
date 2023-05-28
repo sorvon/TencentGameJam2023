@@ -10,11 +10,13 @@ public class StartFilmController : MonoBehaviour
 {
     private GameManager gameManager;
     private SceneController sceneManager;
+    private AudioManager audioManager;
     [SerializeField]private VideoPlayer video;
     private void Start()
     {
         gameManager = ServiceLocator.Get<GameManager>();
         sceneManager = ServiceLocator.Get<SceneController>();
+        audioManager = ServiceLocator.Get<AudioManager>();
         video.Pause();
         Invoke(nameof(StartVideo),1.5f);
     }
@@ -31,5 +33,6 @@ public class StartFilmController : MonoBehaviour
     private void StartVideo()
     {
         video.Play();
+        audioManager.bgmController.PlayStartFilmBGM();
     }
 }

@@ -11,9 +11,9 @@ public class BackgroundScroller : Service
     private List<Transform> backgroundTrans;
 
     [Header("场景切换海拔"), SerializeField] private List<float> transHeight = new List<float>();
-
+    
     private Transform cameraTrans;
-    private LevelManager levelManager;
+    [Other] private LevelManager levelManager;
     new private Camera camera;
 
     [SerializeField]private BackgroundUnit topUnit;
@@ -72,9 +72,9 @@ public class BackgroundScroller : Service
 
     private void Init()
     {
-        topUnit=new BackgroundUnit(backgroundTrans[0].transform);
-        midUnit=new BackgroundUnit(backgroundTrans[1].transform);
-        bottomUnit=new BackgroundUnit(backgroundTrans[2].transform);
+        topUnit=new BackgroundUnit(backgroundTrans[0].transform,levelManager);
+        midUnit=new BackgroundUnit(backgroundTrans[1].transform,levelManager);
+        bottomUnit=new BackgroundUnit(backgroundTrans[2].transform,levelManager);
     }
 
     private void CheckHeight(BackgroundUnit unit)
@@ -108,6 +108,7 @@ public class BackgroundUnit
 {
     public Transform mtransform;
     public BackgroundUnitID unitManager => mtransform.GetComponent<BackgroundUnitID>();
+    private LevelManager levelManager;
 
     public bool ifTransition
     {
@@ -127,9 +128,10 @@ public class BackgroundUnit
         set { mtransform.GetComponent<BackgroundUnitID>().ID = value; }
     }
 
-    public BackgroundUnit(Transform mtransform)
+    public BackgroundUnit(Transform mtransform,LevelManager levelManager)
     {
         this.mtransform = mtransform;
+        this.levelManager = levelManager;
     }
 
     public void ChangeState(bool ifTransition, int id)
@@ -161,6 +163,7 @@ public class BackgroundUnit
             return;
         }
         this.id = id;
+        levelManager.HeightLevel = id;
         unitManager.DisableAll();
         switch (id)
         {

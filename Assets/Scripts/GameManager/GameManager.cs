@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : Service
 {
     [Other] private SceneController sceneController;
+    [Other] private AudioManager audioManager;
     protected override void Awake()
     {
         base.Awake();
@@ -15,13 +16,15 @@ public class GameManager : Service
     public void StartGame()
     {
         sceneController.LoadNextScene();
+        audioManager.bgmController.StartGameBGM();
     }
     public void RestartGame()
     {
-        if (SceneControllerUtility.SceneIndex == 3)
+        if (SceneControllerUtility.SceneIndex == 2)
         {
-            sceneController.LoadScene(3);
+            sceneController.LoadScene(2);
             Debug.LogWarning("RestartGame");
         }
+        audioManager.bgmController.StartGameBGM();
     }
 }

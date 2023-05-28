@@ -116,7 +116,8 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = cameraTrans.position.x;
-                generateY = Random.Range(SpawnDownDown, SpawnDownUp);
+                // generateY = Random.Range(SpawnDownDown, SpawnDownUp);
+                generateY = CameraDown - 2*camera.orthographicSize;
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25); //防止卡死
         }
@@ -127,7 +128,8 @@ public class EnvGenerator : Service
             {
                 tryCount++;
                 generateX = cameraTrans.position.x;
-                generateY = Random.Range(SpawnUpDown, SpawnUpUp);
+                // generateY = Random.Range(SpawnUpDown, SpawnUpUp);
+                generateY = CameraUp +2* camera.orthographicSize;
             } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
                      tryCount < 25);
         }

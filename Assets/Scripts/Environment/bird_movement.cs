@@ -56,4 +56,11 @@ public class bird_movement : MonoBehaviour
         sp.flipX = false;
         generatePos = Vector2.zero;
     }
+
+    public void Init()
+    {
+        ifLeft = true;
+        sp.flipX = false;
+        generatePos = transform.position;
+    }
 }
