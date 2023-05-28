@@ -11,7 +11,8 @@ public class XiaDebug : MonoBehaviour
     private Transform cameraTrans;
     private GameManager manager;
     private LevelManager levelManager;
-    private EnvGenerator generator; 
+    private EnvGenerator generator;
+    private AudioManager audiomanager;
     private void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -19,6 +20,7 @@ public class XiaDebug : MonoBehaviour
         manager = ServiceLocator.Get<GameManager>();
         levelManager = ServiceLocator.Get<LevelManager>();
         generator = ServiceLocator.Get<EnvGenerator>();
+        audiomanager = ServiceLocator.Get<AudioManager>();
     }
 
     private void Update()
@@ -40,6 +42,11 @@ public class XiaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             levelManager.LevelUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            audiomanager.PlaySound("testaudio1");
         }
     }
 }

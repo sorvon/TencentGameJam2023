@@ -10,11 +10,11 @@ public class BGMController : MonoBehaviour
 
     private void Start()
     {
-        eventSystem = ServiceLocator.Get<EventSystem>();
+        // eventSystem = ServiceLocator.Get<EventSystem>();
         audioManager = ServiceLocator.Get<AudioManager>();
 
-        eventSystem.AddListener<int>(EEvent.AfterLoadScene, PlayBGMAfterLoadingScene);
-        audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
+        // eventSystem.AddListener<int>(EEvent.AfterLoadScene, PlayBGMAfterLoadingScene);
+        // audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
     }
 
     private void PlayBGMAfterLoadingScene(int index)
