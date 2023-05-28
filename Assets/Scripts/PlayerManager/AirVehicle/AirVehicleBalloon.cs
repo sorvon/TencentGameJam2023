@@ -42,7 +42,8 @@ public class AirVehicleBalloon : AirVehicleBase
                 hardHorizontalIntervalCount = 0;
                 rb.velocity = new Vector2(hAxis * hardHorizontalStrength, rb.velocity.y);
                 transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? -180 : 0, 0));
-                transform.DOShakeRotation(hardHorizontalInterval, 10);
+                transform.DOKill();
+                transform.DOShakeRotation(4, 15);
             }
         }
     }
