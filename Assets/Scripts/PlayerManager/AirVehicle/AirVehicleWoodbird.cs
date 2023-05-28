@@ -11,8 +11,9 @@ public class AirVehicleWoodbird : AirVehicleBase
 
     [Header("Debug")]
     SkeletonAnimation ska;
-    [SerializeField] bool isHard = false;
+    public bool isHard = false;
     [SerializeField] float hardHorizontalStrength = 5;
+    [SerializeField] float hardHorizontalInterval = 1;
 
     Spine.AnimationState.TrackEntryDelegate cc;
     float flyIntervalCount = 0;
@@ -27,8 +28,10 @@ public class AirVehicleWoodbird : AirVehicleBase
         if (isHard)
         {
             var hAxis = Input.GetAxisRaw("Horizontal");
-            if (hAxis != 0)
+            flyIntervalCount += Time.deltaTime;
+            if (hAxis != 0 && flyIntervalCount >= hardHorizontalInterval)
             {
+                flyIntervalCount = 0;
                 ska.AnimationState.SetAnimation(0, "ÆËÒí", false);
                 flyEnd = false;
                 cc = delegate
@@ -38,14 +41,7 @@ public class AirVehicleWoodbird : AirVehicleBase
                 };
                 ska.AnimationState.Complete += cc;
                 rb.velocity = new Vector2(hAxis * hardHorizontalStrength, flyStrength);
-            }
-            if (hAxis > 0)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-            else if (hAxis < 0)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+                transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? 0:-180, 0));
             }
         }
         else

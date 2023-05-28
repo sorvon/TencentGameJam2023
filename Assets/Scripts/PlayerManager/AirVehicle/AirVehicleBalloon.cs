@@ -12,10 +12,14 @@ public class AirVehicleBalloon : AirVehicleBase
     [SerializeField] GameObject fireObject;
 
     [Header("Debug")]
+    public bool isHard = false;
+    public float hardHorizontalStrength = 5;
+    public float hardHorizontalInterval = 1;
     SkeletonAnimation ska;
 
     CinemachineFramingTransposer vcamTransposer;
     float currentFuel;
+    float hardHorizontalIntervalCount = 0;
     void Awake()
     {
         currentFuel = maxFuel;
@@ -23,10 +27,29 @@ public class AirVehicleBalloon : AirVehicleBase
         ska = GetComponent<SkeletonAnimation>();
     }
 
+    private void Update()
+    {
+        if (isHard)
+        {
+            var hAxis = Input.GetAxisRaw("Horizontal");
+            hAxis = -hAxis;
+            hardHorizontalIntervalCount += Time.deltaTime;
+            if (hAxis != 0 && hardHorizontalIntervalCount >= hardHorizontalInterval)
+            {
+                hardHorizontalIntervalCount = 0;
+                rb.velocity = new Vector2(hAxis * hardHorizontalStrength, rb.velocity.y);
+                transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? -180 : 0, 0));
+            }
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        HorizontalMove();
+        if (!isHard)
+        {
+            HorizontalMove();
+        }
+        
         if (Input.GetButton("Fire1"))
         {
             if (ska.AnimationName != "·ÉÐÐ")
