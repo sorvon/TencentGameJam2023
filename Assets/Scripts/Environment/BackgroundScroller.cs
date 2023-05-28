@@ -152,6 +152,11 @@ public class BackgroundUnit
                 unitManager.DisableAll();
                 unitManager.transition1.gameObject.SetActive(true);
             }
+            else if (id == 2)
+            {
+                unitManager.DisableAll();
+                unitManager.transition2.gameObject.SetActive(true);
+            }
 
             return;
         }
@@ -167,6 +172,9 @@ public class BackgroundUnit
                 break;
             case 2:
                 unitManager.height2.gameObject.SetActive(true);
+                break;
+            case 3:
+                unitManager.height3.gameObject.SetActive(true);
                 break;
             default:
                 Debug.LogWarning($"不存在正常场景图{id}");
