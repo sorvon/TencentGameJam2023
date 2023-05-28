@@ -6,17 +6,17 @@ using Spine.Unity;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Config")]
-    [SerializeField] int[] collectionCountConfig;
+    [SerializeField] int[] collectionCountConfig;//
     [SerializeField] GameObject[] airVehicleList;
-    [SerializeField] TextMeshProUGUI heightNumberText;
-    [SerializeField] TextMeshProUGUI collectNumberText;
+    [SerializeField] TextMeshProUGUI heightNumberText;//
+    [SerializeField] TextMeshProUGUI collectNumberText;//
     [SerializeField] float invincibleTime = 3;
 
     [Header("Debug")]
     [SerializeField] GameObject currentAirVehicle;
     [SerializeField] int airVehicleIndex = 0;
     [SerializeField] Rigidbody2D rb;
-    int collectionCount = 0;
+    int collectionCount = 0;//
     bool isInvincible = false;
     private void Awake()
     {
