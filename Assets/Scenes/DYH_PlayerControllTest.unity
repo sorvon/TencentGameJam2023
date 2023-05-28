@@ -2859,7 +2859,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 60, y: 10}
+  m_Size: {x: 60, y: 16.171688}
   m_EdgeRadius: 0
 --- !u!1 &1957009421
 GameObject:
@@ -3001,7 +3001,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1075175740, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1751679764, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068015912, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -3009,6 +3017,10 @@ PrefabInstance:
       propertyPath: vcam
       value: 
       objectReference: {fileID: 1648973934}
+    - target: {fileID: 7969232220219409827, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7969232220402279832, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: vcam
       value: 

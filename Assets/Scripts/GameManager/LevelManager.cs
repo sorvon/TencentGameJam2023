@@ -27,7 +27,7 @@ public class LevelManager : Service
                 return;
            
             collectionCount = value;
-            if (collectionCount >= collectionCountConfig[Level])
+            if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
                 Level++;
                 collectionCount = 0;
@@ -47,7 +47,7 @@ public class LevelManager : Service
         get { return level; }
         private set
         {
-            if (value == level || value >= collectionCountConfig.Count )
+            if (value == level || value > collectionCountConfig.Count )
                 return;
             level = value;
             OnLevelUpInt?.Invoke(level);
@@ -94,7 +94,15 @@ public class LevelManager : Service
     {
         if (!collectNumberText)
             return;
-        collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+        if (Level < collectionCountConfig.Count)
+        {
+            collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+        }
+        else
+        {
+            collectNumberText.text = $"{collectionCount}";
+        }
+        
     }
 
     /// <summary>

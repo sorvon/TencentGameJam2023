@@ -11,6 +11,8 @@ public class AirVehicleWoodbird : AirVehicleBase
 
     [Header("Debug")]
     SkeletonAnimation ska;
+    [SerializeField] bool isHard = false;
+    [SerializeField] float hardHorizontalStrength = 5;
 
     Spine.AnimationState.TrackEntryDelegate cc;
     float flyIntervalCount = 0;
@@ -22,21 +24,49 @@ public class AirVehicleWoodbird : AirVehicleBase
 
     void Update()
     {
-        HorizontalMove();
-        flyIntervalCount += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
+        if (isHard)
         {
-            ska.AnimationState.SetAnimation(0, "∆À“Ì", false);
-            flyEnd = false;
-            cc = delegate
+            var hAxis = Input.GetAxisRaw("Horizontal");
+            if (hAxis != 0)
             {
-                flyEnd = true;
-                ska.AnimationState.Complete -= cc;
-            };
-            ska.AnimationState.Complete += cc;
-            flyIntervalCount = 0;
-            rb.velocity = new Vector2(rb.velocity.x, flyStrength);
+                ska.AnimationState.SetAnimation(0, "∆À“Ì", false);
+                flyEnd = false;
+                cc = delegate
+                {
+                    flyEnd = true;
+                    ska.AnimationState.Complete -= cc;
+                };
+                ska.AnimationState.Complete += cc;
+                rb.velocity = new Vector2(hAxis * hardHorizontalStrength, flyStrength);
+            }
+            if (hAxis > 0)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            else if (hAxis < 0)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+            }
         }
+        else
+        {
+            HorizontalMove();
+            flyIntervalCount += Time.deltaTime;
+            if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
+            {
+                ska.AnimationState.SetAnimation(0, "∆À“Ì", false);
+                flyEnd = false;
+                cc = delegate
+                {
+                    flyEnd = true;
+                    ska.AnimationState.Complete -= cc;
+                };
+                ska.AnimationState.Complete += cc;
+                flyIntervalCount = 0;
+                rb.velocity = new Vector2(rb.velocity.x, flyStrength);
+            }
+        }
+        
     }
 
     private void FixedUpdate()
