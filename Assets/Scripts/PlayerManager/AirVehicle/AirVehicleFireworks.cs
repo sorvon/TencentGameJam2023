@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class AirVehicleFireworks : AirVehicleBase
         fireDirection = 0;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
+        
+    }
+
+    private void Start()
+    {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 
@@ -64,6 +70,7 @@ public class AirVehicleFireworks : AirVehicleBase
 
     private void OnDisable()
     {
-        audioManager.StopSound("Fireworks");
+        if(audioManager)
+            audioManager.StopSound("Fireworks");
     }
 }
