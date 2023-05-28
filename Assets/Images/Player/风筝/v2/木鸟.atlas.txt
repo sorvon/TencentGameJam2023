@@ -1,0 +1,124 @@
+
+木鸟.png
+size: 2405,2405
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2
+  rotate: false
+  xy: 2, 243
+  size: 2160, 2160
+  orig: 2160, 2160
+  offset: 0, 0
+  index: -1
+b-arm 的複製
+  rotate: false
+  xy: 2164, 281
+  size: 107, 311
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+f-arm 的複製
+  rotate: false
+  xy: 2164, 281
+  size: 107, 311
+  orig: 107, 311
+  offset: 0, 0
+  index: -1
+b-leg 的複製
+  rotate: false
+  xy: 2164, 718
+  size: 115, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+f-leg 的複製
+  rotate: false
+  xy: 2164, 718
+  size: 115, 496
+  orig: 115, 496
+  offset: 0, 0
+  index: -1
+chest 的複製
+  rotate: false
+  xy: 2164, 114
+  size: 95, 165
+  orig: 95, 165
+  offset: 0, 0
+  index: -1
+face 的複製
+  rotate: false
+  xy: 2164, 594
+  size: 112, 122
+  orig: 112, 122
+  offset: 0, 0
+  index: -1
+gadget1 的複製
+  rotate: false
+  xy: 2296, 1648
+  size: 26, 22
+  orig: 26, 22
+  offset: 0, 0
+  index: -1
+hair 的複製
+  rotate: false
+  xy: 2164, 1672
+  size: 166, 151
+  orig: 166, 151
+  offset: 0, 0
+  index: -1
+neck 的複製
+  rotate: false
+  xy: 2261, 222
+  size: 43, 57
+  orig: 43, 57
+  offset: 0, 0
+  index: -1
+skirt 的複製
+  rotate: false
+  xy: 2164, 2102
+  size: 239, 301
+  orig: 239, 301
+  offset: 0, 0
+  index: -1
+tail 的複製
+  rotate: false
+  xy: 2164, 1825
+  size: 180, 275
+  orig: 180, 275
+  offset: 0, 0
+  index: -1
+圖層 2 的複製
+  rotate: false
+  xy: 2296, 1625
+  size: 18, 21
+  orig: 18, 21
+  offset: 0, 0
+  index: -1
+圖層gadget2-f 2 的複製
+  rotate: false
+  xy: 2164, 1444
+  size: 130, 226
+  orig: 130, 226
+  offset: 0, 0
+  index: -1
+圖層gadget2-f 2 的複製 2
+  rotate: false
+  xy: 2164, 1216
+  size: 130, 226
+  orig: 130, 226
+  offset: 0, 0
+  index: -1
+
+木鸟2.png
+size: 2164,2164
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 2
+  size: 2160, 2160
+  orig: 2160, 2160
+  offset: 0, 0
+  index: -1

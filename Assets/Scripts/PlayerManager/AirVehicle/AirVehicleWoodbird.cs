@@ -26,7 +26,6 @@ public class AirVehicleWoodbird : AirVehicleBase
         flyIntervalCount += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
         {
-            ska.AnimationState.ClearTracks();
             ska.AnimationState.SetAnimation(0, "ÆËÒí", false);
             flyEnd = false;
             cc = delegate
@@ -48,6 +47,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 if (ska.AnimationName != "»¬Ïè")
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, flyStrength / 5);
                     ska.AnimationState.SetAnimation(0, "»¬Ïè", true);
                 }
                 rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(maxVelocity_Y, rb.velocity.y));
@@ -56,7 +56,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 if (ska.AnimationName != "ÏÂ×¹")
                 {
-                    ska.AnimationState.SetAnimation(0, "ÏÂ×¹", true);
+                    ska.AnimationState.SetAnimation(0, "ÏÂ×¹", false);
                 }
             }
         }

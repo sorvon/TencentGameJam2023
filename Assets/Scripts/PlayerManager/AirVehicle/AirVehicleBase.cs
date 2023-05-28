@@ -26,11 +26,13 @@ public class AirVehicleBase : MonoBehaviour
         {
             transform.DOKill();
             transform.DORotate(new Vector3(0, 0, 0), 360).SetSpeedBased();
+            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else if(hAxis < 0)
         {
             transform.DOKill();
             transform.DORotate(new Vector3(0, -180, 0), 360).SetSpeedBased();
+            //transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
         }
         
     }
