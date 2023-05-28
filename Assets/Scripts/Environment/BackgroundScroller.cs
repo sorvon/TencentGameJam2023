@@ -6,14 +6,15 @@ using UnityEngine;
 
 public class BackgroundScroller : Service
 {
-    [Header("摄像机")]
-    [SerializeField] new private Camera camera;
+
     [Header("背景图")]
     [SerializeField] private List<Transform> backgroundTrans;
 
     [Header("场景切换海拔")] private List<float> transHeight=new List<float>();
 
     private Transform cameraTrans;
+    private LevelManager levelManager;
+    new private Camera camera;
     
     private Transform top;
     private Transform mid;
@@ -26,10 +27,12 @@ public class BackgroundScroller : Service
     private float CameraUp => cameraTrans.position.y + camera.orthographicSize; //摄像机上边界
     private float CameraDown => cameraTrans.position.y - camera.orthographicSize;
     private float CameraX => cameraTrans.position.x;
+    private float Height => levelManager.Height;
 
     protected override void Start()
     {
         base.Start();
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraTrans = camera.GetComponent<Transform>();
         Init();
     }
