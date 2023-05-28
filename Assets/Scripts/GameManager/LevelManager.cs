@@ -29,12 +29,13 @@ public class LevelManager : Service
             collectionCount = value;
             if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
-                Level++;
                 if (handbookObject != null)
                 {
                     handbookObject.SetActive(true);
+                    handbookObject.GetComponent<HandbookManager>().SetHandbookSprite(Level);
                     handbookObject.GetComponent<Animator>().SetTrigger("Open");
                 }
+                Level++;
                 collectionCount = 0;
             }
             UpdateCollectionText();

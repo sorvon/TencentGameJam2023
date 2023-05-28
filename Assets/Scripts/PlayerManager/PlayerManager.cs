@@ -8,17 +8,15 @@ using Spine.Unity;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Config")]
-    [SerializeField] int[] collectionCountConfig;//
     [SerializeField] GameObject[] airVehicleList;
-    [SerializeField] TextMeshProUGUI heightNumberText;//
-    [SerializeField] TextMeshProUGUI collectNumberText;//
     [SerializeField] float invincibleTime = 3;
 
     [Header("Debug")]
     [SerializeField] GameObject currentAirVehicle;
     [SerializeField] int airVehicleIndex = 0;
     [SerializeField] Rigidbody2D rb;
-    int collectionCount = 0;//
+
+    AudioManager audioManager;
     bool isInvincible = false;
     private LevelManager levelManager;
     private int CurrentLevel => levelManager.Level;
@@ -34,26 +32,15 @@ public class PlayerManager : MonoBehaviour
             }
             airVehicleList[i].SetActive(i == airVehicleIndex);
         }
-        if (collectNumberText != null)
-        {
-            collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
-        }
     }
 
     private void Start()
     {
+        audioManager = ServiceLocator.Get<AudioManager>();
         levelManager = ServiceLocator.Get<LevelManager>();
         levelManager.OnLevelUpInt += OnLevelUp;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // if (heightNumberText != null)
-        // {
-        //     heightNumberText.text = $"{transform.position.y:N}";
-        // }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -62,16 +49,12 @@ public class PlayerManager : MonoBehaviour
         {
             collision.GetComponent<Services.IMyObject>().Recycle();
             levelManager.CollectionCount++;
+            audioManager.PlaySound("Pick");
         }
         if (collision.CompareTag("Obstacle") && !isInvincible)
         {
             rb.velocity = Vector2.zero;
-            // collectionCount = Mathf.Max(collectionCount - 1, 0);
             levelManager.CollectionCount--;
-            // if (collectNumberText != null)
-            // {
-            //     collectNumberText.text = $"{collectionCount}/{collectionCountConfig[airVehicleIndex]}";
-            // }
             if (currentAirVehicle.TryGetComponent(out SkeletonAnimation ska))
             {
                 StartCoroutine(SpineSkeletonFlash(ska));
