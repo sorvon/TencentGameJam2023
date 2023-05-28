@@ -19,7 +19,7 @@ public class AirVehicleBase : MonoBehaviour
 
     protected void HorizontalMove()
     {
-        var hAxis = Input.GetAxisRaw("Horizontal");
+        var hAxis = Input.GetAxis("Horizontal");
         
         rb.velocity = new Vector2(hAxis * horizontalVelocity, rb.velocity.y);  
         if (hAxis > 0)

@@ -7,7 +7,7 @@ using UnityEngine;
 public class BackgroundScroller : Service
 {
     [Header("摄像机")]
-    [SerializeField] private Camera camera;
+    [SerializeField] new private Camera camera;
     [Header("背景图")]
     [SerializeField] private List<Transform> backgroundTrans;
 
