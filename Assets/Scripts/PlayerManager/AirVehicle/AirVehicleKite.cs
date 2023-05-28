@@ -12,8 +12,12 @@ public class AirVehicleKite : AirVehicleBase
     AudioManager audioManager;
     private void Awake()
     {
-        audioManager = Services.ServiceLocator.Get<AudioManager>();
         ska = GetComponent<SkeletonAnimation>();
+    }
+
+    private void Start()
+    {
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
     void Update()
     {

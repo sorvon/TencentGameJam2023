@@ -15,6 +15,11 @@ public class AirVehicleMeteor : AirVehicleBase
     private void Awake()
     {
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+       
+    }
+
+    private void Start()
+    {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
     private void OnEnable()

@@ -24,6 +24,10 @@ public class AirVehicleWoodbird : AirVehicleBase
     private void Awake()
     {
         ska = GetComponent<SkeletonAnimation>();
+    }
+
+    private void Start()
+    {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 

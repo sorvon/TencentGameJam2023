@@ -31,6 +31,10 @@ public class AirVehicleBalloon : AirVehicleBase
         currentFuel = maxFuel;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
+        
+    }
+    private void Start()
+    {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 

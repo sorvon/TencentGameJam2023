@@ -23,9 +23,13 @@ public class AirVehicleFireworks : AirVehicleBase
         fireDirection = 0;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
-        audioManager = Services.ServiceLocator.Get<AudioManager>();
+        
     }
 
+    private void Start()
+    {
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
