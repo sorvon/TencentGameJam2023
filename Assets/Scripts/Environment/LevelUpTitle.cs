@@ -14,17 +14,23 @@ public class LevelUpTitle : MonoBehaviour
     private TMP_Text title;
 
     private Dictionary<int, string> level2title;
+    private LevelManager LevelManager;
 
     protected void Start()
     {
+        LevelManager = ServiceLocator.Get<LevelManager>();
         title = GetComponentInChildren<TMP_Text>();
+        title.gameObject.SetActive(false);
         level2title = new Dictionary<int, string>()
         {
             { 0, "雏鸟" },
             { 1, "腾飞" },
             { 2, "飞升" },
-            { 3, "宏愿" }
+            { 3, "宏愿" },
+            {4,"四四"},
+            {5,"五五"}
         };
+        LevelManager.OnLevelUpInt += OnLevelUp;
     }
 
     public void OnLevelUp(int level)

@@ -30,6 +30,8 @@ public class AudioManager : Service
     private Dictionary<ESoundGroup, float> groupVolumeBeforeMuted;
     private Dictionary<ESoundGroup, List<Sound>> soundGroupDics;
 
+    private Camera mainCamera;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +39,8 @@ public class AudioManager : Service
         groupVolumeBeforeMuted = new Dictionary<ESoundGroup, float>();
         soundGroupDics = new Dictionary<ESoundGroup, List<Sound>>();
         soundData = Resources.Load<SoundData>("SoundData");
+
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     protected override void Start()
@@ -44,7 +48,7 @@ public class AudioManager : Service
         base.Start();
         Transform managerTrans = new GameObject("AudioManager").transform;
         bgmController = managerTrans.gameObject.AddComponent<BGMController>();
-        DontDestroyOnLoad(managerTrans.gameObject);
+        managerTrans.SetParent(mainCamera.transform);
         //managerTrans.SetParent(transform);
 
         foreach (var group in soundData.soundGroups)
@@ -118,11 +122,14 @@ public class AudioManager : Service
                 }
                 curSound.lastPlayTime = Time.time;
                 foreach (var source in curSources)
+                {
                     if (!source.isPlaying)
                     {
                         FixedPlay(source);
                         return;
                     }
+                    Debug.Log($"{source.gameObject.name}正在播放");
+                }
                 //若遍历完还没有空余的AudioSource则新建一个AudioSource
                 GameObject newSourceObj = new GameObject($"{curSound.name}{curSources.Count + 1}");
                 AudioSource newSource = newSourceObj.AddComponent<AudioSource>();
