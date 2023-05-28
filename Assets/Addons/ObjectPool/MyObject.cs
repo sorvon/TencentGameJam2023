@@ -50,7 +50,10 @@ namespace Services
         {
             if (b_createdByPool && objectPoolAttached != null)
             {
-                if (Active == false) Debug.LogWarning($"{name}被错误地回收了两次！");
+                if (Active == false)
+                {
+                    return;
+                };
                 OnRecycle?.Invoke();
                 Active = false;
                 objectPoolAttached.Recycle(this);
