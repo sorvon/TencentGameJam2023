@@ -46,6 +46,7 @@ public class LevelUpTitle : MonoBehaviour
         float timer = 0;
         while (timer < enterTime)
         {
+            timer += Time.deltaTime;
             title.color = new Color(1, 1, 1, timer / enterTime);
             yield return new WaitForFixedUpdate();
         }
@@ -54,6 +55,7 @@ public class LevelUpTitle : MonoBehaviour
         timer = 0;
         while (timer < exitTime)
         {
+            timer += Time.deltaTime;
             title.color = new Color(1, 1, 1, 1-timer / exitTime);
             yield return new WaitForFixedUpdate();
         }
