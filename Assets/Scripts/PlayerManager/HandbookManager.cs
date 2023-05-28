@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Services;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Spine.Unity;
 
@@ -11,11 +12,11 @@ public class HandbookManager : MonoBehaviour
     [SerializeField] Sprite[] handbookSprites;
     
     LevelManager levelManager;
-    SpriteRenderer spriteRenderer;
+    Image spriteRenderer;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<Image>();
     }
     private void Start()
     {
