@@ -28,7 +28,7 @@ namespace Services
         {
             if (sceneIndexDict.TryGetValue(sceneName, out int index))
                 return index;
-            Debug.LogWarning($"BuildSettingsÖĞÃ»ÓĞÃûÎª{sceneName}µÄ³¡¾° ");
+            Debug.LogWarning($"BuildSettingsä¸­æ²¡æœ‰åä¸º{sceneName}çš„åœºæ™¯ ");
             return -1;
         }
 
@@ -36,7 +36,7 @@ namespace Services
         {
             if (sceneNameDict.TryGetValue(sceneIndex, out string name))
                 return name;
-            Debug.LogWarning($"BuildSettingsÖĞÃ»ÓĞË÷ÒıÎª{sceneIndex}µÄ³¡¾° ");
+            Debug.LogWarning($"BuildSettingsä¸­æ²¡æœ‰ç´¢å¼•ä¸º{sceneIndex}çš„åœºæ™¯ ");
             return null;
         }
 

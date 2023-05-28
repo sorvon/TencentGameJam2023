@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5948588549066145136}
   - component: {fileID: 6017992141944724887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u56FA\u5B9A\u969C\u788D\u7269_\u5CA9\u77F32_2"
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3597594033950227391}
   - component: {fileID: 8697246557187933057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u56FA\u5B9A\u969C\u788D\u7269_\u5CA9\u77F32_2 (1)"
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,9 +177,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7328463644495604865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1_3
-  m_TagString: Untagged
+  m_TagString: Combine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,9 +213,9 @@ GameObject:
   m_Component:
   - component: {fileID: 809351059206000493}
   - component: {fileID: 6231308190912555326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u56FA\u5B9A\u969C\u788D\u7269_\u5CA9\u77F33_1 (1)"
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,9 +297,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5435794945971005419}
   - component: {fileID: 1510845952671687824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u56FA\u5B9A\u969C\u788D\u7269_\u5CA9\u77F33_1"
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Services
 {
     /// <summary>
-    /// ¿ÉÍ¨¹ıGet»ñÈ¡¼Ì³Ğ´ËÀàµÄ×ÓÀà¶ÔÏó£¬Ã¿¸öÀàµÄ¶ÔÏóÓ¦µ±ÊÇÎ¨Ò»µÄ
+    /// å¯é€šè¿‡Getè·å–ç»§æ‰¿æ­¤ç±»çš„å­ç±»å¯¹è±¡ï¼Œæ¯ä¸ªç±»çš„å¯¹è±¡åº”å½“æ˜¯å”¯ä¸€çš„
     /// </summary>
     public class Service : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace Services
         //protected virtual void Init() { }
 
         /// <summary>
-        /// »ñÈ¡OtherÌØĞÔµÄ·şÎñ
+        /// è·å–Otherç‰¹æ€§çš„æœåŠ¡
         /// </summary>
         internal void GetOtherService()
         {
@@ -44,14 +44,14 @@ namespace Services
     }
 
     /// <summary>
-    ///×Ô¶¯»ñÈ¡ÆäËû·şÎñ£¬½öÓÃÓÚServiceµÄ×ÓÀà
+    ///è‡ªåŠ¨è·å–å…¶ä»–æœåŠ¡ï¼Œä»…ç”¨äºServiceçš„å­ç±»
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     internal class OtherAttribute : Attribute
     {
         internal Type type;
 
-        /// <param name="_type">»ñÈ¡BÀàÊµÀı²¢¸³Öµ¸øAÀàÊ±£¨BÀà¼Ì³ĞAÀà£©£¬ĞèÒªÖ¸¶¨BÀàµÄÀàĞÍÎª²ÎÊı£¬·ñÔò²»ÓÃÖ¸¶¨²ÎÊı</param>
+        /// <param name="_type">è·å–Bç±»å®ä¾‹å¹¶èµ‹å€¼ç»™Aç±»æ—¶ï¼ˆBç±»ç»§æ‰¿Aç±»ï¼‰ï¼Œéœ€è¦æŒ‡å®šBç±»çš„ç±»å‹ä¸ºå‚æ•°ï¼Œå¦åˆ™ä¸ç”¨æŒ‡å®šå‚æ•°</param>
         public OtherAttribute(Type _type = null)
         {
             type = _type;

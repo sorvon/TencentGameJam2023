@@ -8,7 +8,7 @@ namespace Services
     public class SceneControllerCore
     {
         /// <summary>
-        /// ¿ªÊ¼Òì²½¼ÓÔØ³¡¾°Ê±£¬·¢ËÍÒì²½²Ù×÷
+        /// å¼€å§‹å¼‚æ­¥åŠ è½½åœºæ™¯æ—¶ï¼Œå‘é€å¼‚æ­¥æ“ä½œ
         /// </summary>
         public event UnityAction<AsyncOperation> AsyncLoadScene;
 
@@ -16,7 +16,7 @@ namespace Services
         internal event UnityAction<int> AfterLoadScene;
         internal MonoBehaviour mono;
 
-        //²»ÄÜ´«¿ÕUnityAction£¬ÒòÎªÏàµ±ÓÚ´«ÁËnull£¬¶şÕßÃ»ÓĞ°ó¶¨ÔÚÒ»Æğ
+        //ä¸èƒ½ä¼ ç©ºUnityActionï¼Œå› ä¸ºç›¸å½“äºä¼ äº†nullï¼ŒäºŒè€…æ²¡æœ‰ç»‘å®šåœ¨ä¸€èµ·
         internal SceneControllerCore(MonoBehaviour mono, UnityAction<int> BeforeLoadScene, UnityAction<int> AfterLoadScene)
         {
             this.mono = mono;
@@ -42,7 +42,7 @@ namespace Services
 #endif
         }
 
-        /// <param name="confirm">¼ÓÔØµ½90%Ê±ÊÇ·ñĞèÒªÈ·ÈÏ</param>
+        /// <param name="confirm">åŠ è½½åˆ°90%æ—¶æ˜¯å¦éœ€è¦ç¡®è®¤</param>
         private IEnumerator LoadScene_(LoadSceneProcess process)
         {
             BeforeLoadScene?.Invoke(process.index);

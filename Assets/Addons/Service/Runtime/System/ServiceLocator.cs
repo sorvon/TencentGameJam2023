@@ -8,16 +8,16 @@ namespace Services
     public static class ServiceLocator
     {
         /// <summary>
-        /// ·Ç0³¡¾°ÖĞµÄÎïÌåÍ¨³£Ö±½Ó»ñÈ¡Service£¬²»ĞèÒªÀûÓÃ´ËÊÂ¼ş
+        /// é0åœºæ™¯ä¸­çš„ç‰©ä½“é€šå¸¸ç›´æ¥è·å–Serviceï¼Œä¸éœ€è¦åˆ©ç”¨æ­¤äº‹ä»¶
         /// </summary>
         //public static UnityAction<Service> ServiceInit;
 
         internal static readonly Dictionary<Type, Service> serviceDict = new Dictionary<Type, Service>();
 
         /// <summary>
-        /// »ñÈ¡Ò»¸ö·şÎñ
+        /// è·å–ä¸€ä¸ªæœåŠ¡
         /// </summary>
-        /// <typeparam name="T">ÔÚ¶à¸ö×ÓÀàÖĞÑ¡ÔñÒ»¸öÊ±£¬TÓ¦Ö¸¶¨ÎªÒ»¸ö×ÓÀà¶ø²»ÊÇ¹²Í¬µÄ¸¸Àà</typeparam>
+        /// <typeparam name="T">åœ¨å¤šä¸ªå­ç±»ä¸­é€‰æ‹©ä¸€ä¸ªæ—¶ï¼ŒTåº”æŒ‡å®šä¸ºä¸€ä¸ªå­ç±»è€Œä¸æ˜¯å…±åŒçš„çˆ¶ç±»</typeparam>
         internal static T Get<T>() where T : Service
             => Get(typeof(T)) as T;
 
@@ -25,7 +25,7 @@ namespace Services
         {
             if (!serviceDict.ContainsKey(type))
             {
-                Debug.LogWarning($"·şÎñ²»´æÔÚ£¬·şÎñÀàĞÍÎª{type}");
+                Debug.LogWarning($"æœåŠ¡ä¸å­˜åœ¨ï¼ŒæœåŠ¡ç±»å‹ä¸º{type}");
                 return null;
             }
             return serviceDict[type];
@@ -36,7 +36,7 @@ namespace Services
             Type type = service.GetType();
             if (serviceDict.ContainsKey(type))
             {
-                Debug.LogWarning($"·şÎñÒıÓÃµÄ½Å±¾±»ĞŞ¸ÄÁË£¬·şÎñÀàĞÍÎª{type}");
+                Debug.LogWarning($"æœåŠ¡å¼•ç”¨çš„è„šæœ¬è¢«ä¿®æ”¹äº†ï¼ŒæœåŠ¡ç±»å‹ä¸º{type}");
                 serviceDict[type] = service;
             }
             else

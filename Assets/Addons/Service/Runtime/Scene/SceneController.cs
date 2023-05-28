@@ -12,12 +12,12 @@ namespace Services
         private SceneControllerCore core;
 
         /// <summary>
-        /// ÊÇ·ñÒì²½¼ÓÔØ³¡¾°
+        /// æ˜¯å¦å¼‚æ­¥åŠ è½½åœºæ™¯
         /// </summary>
         [SerializeField]
         private bool async = true;
         /// <summary>
-        /// ÊÇ·ñĞèÒªÈ·ÈÏ
+        /// æ˜¯å¦éœ€è¦ç¡®è®¤
         /// </summary>
         [SerializeField]
         private bool needConfirm = true;
@@ -25,7 +25,7 @@ namespace Services
         public static bool InGame => SceneControllerUtility.SceneIndex == 2;
 
         /// <summary>
-        /// ¿ªÊ¼Òì²½¼ÓÔØ³¡¾°Ê±£¬·¢ËÍÒì²½²Ù×÷£¬Èç¹û²»¹ØĞÄ¼ÓÔØ½ø¶È£¬Ê¹ÓÃEventSystemÖĞµÄÊÂ¼ş¼´¿É
+        /// å¼€å§‹å¼‚æ­¥åŠ è½½åœºæ™¯æ—¶ï¼Œå‘é€å¼‚æ­¥æ“ä½œï¼Œå¦‚æœä¸å…³å¿ƒåŠ è½½è¿›åº¦ï¼Œä½¿ç”¨EventSystemä¸­çš„äº‹ä»¶å³å¯
         /// </summary>
         public event UnityAction<AsyncOperation> AsyncLoadScene
         {
