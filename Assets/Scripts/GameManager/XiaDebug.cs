@@ -10,11 +10,13 @@ public class XiaDebug : MonoBehaviour
     new private Camera camera;
     private Transform cameraTrans;
     private GameManager manager;
+    private EnvGenerator generator; 
     private void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraTrans = camera.transform;
         manager = ServiceLocator.Get<GameManager>();
+        generator = ServiceLocator.Get<EnvGenerator>();
     }
 
     private void Update()
@@ -31,6 +33,11 @@ public class XiaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             manager.RestartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            generator.LevelUp();
         }
     }
 }

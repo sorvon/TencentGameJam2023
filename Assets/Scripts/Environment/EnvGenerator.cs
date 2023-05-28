@@ -12,7 +12,8 @@ public class EnvGenerator : Service
 
     [Other] private ObjectManager objectManager;
     private Dictionary<EObject, Collection> collections;
-    private Dictionary<EObject, List<float>> spawnPosDict;
+    private Dictionary<int, EObject> level2collection;
+
     new private Camera camera;
 
     private EObject currentType; //当前收集物的种类
@@ -63,8 +64,16 @@ public class EnvGenerator : Service
             Collection collection = new Collection(interval.type, interval.interval);
             collections.Add(interval.type, collection);
         }
-
-        currentType = EObject.Cloud;
+        
+        level2collection = new Dictionary<int, EObject>()
+        {
+            { 0, EObject.Kite },
+            { 1, EObject.Feather },
+            { 2, EObject.Firecracker },
+            { 3, EObject.Kindling },
+            { 4, EObject.Star }
+        };
+        currentType = level2collection[0];
         ReadLevelConfig();
     }
 
@@ -170,5 +179,17 @@ public class EnvGenerator : Service
                 objectManager.Activate(currentType, coTrans.position);
         }
 
+    }
+
+    public void LevelUp()
+    {
+        if (currentLevel >= 2)
+        {
+            Debug.LogWarning($"当前已达最高等级{currentLevel}，仍触发了LevelUp");
+            return;
+        }
+        currentLevel++;
+        currentType = level2collection[currentLevel];
+        ReadLevelConfig();
     }
 }

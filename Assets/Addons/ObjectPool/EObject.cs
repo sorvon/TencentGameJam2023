@@ -6,34 +6,32 @@ namespace Services
         /// 云朵
         /// </summary>
         Cloud,
+
         /// <summary>
         /// 火种
         /// </summary>
         Kindling,
+
         /// <summary>
         /// 风筝
         /// </summary>
         Kite,
+
         /// <summary>
         /// 羽毛
         /// </summary>
         Feather,
+
         /// <summary>
         /// 星星
         /// </summary>
         Star,
+
         /// <summary>
-        /// 雷云
+        /// 炮仗
         /// </summary>
-        ThunderCloud,
-        /// <summary>
-        /// 左边伸出的树枝
-        /// </summary>
-        LeftStick,
-        /// <summary>
-        /// 右边伸出的树枝
-        /// </summary>
-        RightStick,
+        Firecracker,
+        
         C01,
         C02,
         C03,
@@ -50,8 +48,6 @@ namespace Services
         C18,
         C19,
         C21,
-        C22
-        
-        
+        C22,
     }
 }
