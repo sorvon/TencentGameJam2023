@@ -12,4 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36eb59308c507648ba9218b190f551b, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  soundGroups: []
+  soundGroups:
+  - groupType: 0
+    sounds:
+    - name: testaudio1
+      audioClip: {fileID: 8300000, guid: 3d8fb38d01c982845b104ebfc0ca8c7f, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 0
+      pitch: 1
+  - groupType: 1
+    sounds:
+    - name: OpenKite
+      audioClip: {fileID: 8300000, guid: 3d8fb38d01c982845b104ebfc0ca8c7f, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 0
+      pitch: 1
+    - name: Fly
+      audioClip: {fileID: 8300000, guid: 5f9fed2a08fa0f349989e61a3500e87c, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 0
+      pitch: 1
+    - name: Fireworks
+      audioClip: {fileID: 8300000, guid: 88bdeda717973bd49ae9b6004ef1dc70, type: 3}
+      initVolume: 0.2
+      playOnAwake: 0
+      loop: 1
+      pitch: 1
+    - name: Fire
+      audioClip: {fileID: 8300000, guid: 08283db4b0b616a479068a2644f505cd, type: 3}
+      initVolume: 0.5
+      playOnAwake: 0
+      loop: 1
+      pitch: 1
+    - name: Meteor
+      audioClip: {fileID: 8300000, guid: 58a79541ee7794548acee2b246226b7d, type: 3}
+      initVolume: 1
+      playOnAwake: 0
+      loop: 1
+      pitch: 1

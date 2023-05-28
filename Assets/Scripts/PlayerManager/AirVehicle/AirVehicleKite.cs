@@ -9,8 +9,10 @@ public class AirVehicleKite : AirVehicleBase
     [Header("Debug")]
     SkeletonAnimation ska;
 
+    AudioManager audioManager;
     private void Awake()
     {
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
         ska = GetComponent<SkeletonAnimation>();
     }
     void Update()
@@ -20,6 +22,7 @@ public class AirVehicleKite : AirVehicleBase
         {
             if (ska.AnimationName != "»¬Ïè")
             {
+                audioManager.PlaySound("OpenKite");
                 ska.AnimationState.SetAnimation(0, "»¬Ïè", true);
             }
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(maxVelocity_Y, rb.velocity.y));

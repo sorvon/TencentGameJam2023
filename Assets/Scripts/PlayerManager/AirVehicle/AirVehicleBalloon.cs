@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Spine.Unity;
+using DG.Tweening;
 public class AirVehicleBalloon : AirVehicleBase
 {
     [Header("热气球配置")]
@@ -20,11 +21,13 @@ public class AirVehicleBalloon : AirVehicleBase
     CinemachineFramingTransposer vcamTransposer;
     float currentFuel;
     float hardHorizontalIntervalCount = 0;
+    AudioManager audioManager;
     void Awake()
     {
         currentFuel = maxFuel;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 
     private void Update()
@@ -39,6 +42,8 @@ public class AirVehicleBalloon : AirVehicleBase
                 hardHorizontalIntervalCount = 0;
                 rb.velocity = new Vector2(hAxis * hardHorizontalStrength, rb.velocity.y);
                 transform.rotation = Quaternion.Euler(new Vector3(0, hAxis > 0 ? -180 : 0, 0));
+                transform.DOKill();
+                transform.DOShakeRotation(4, 15);
             }
         }
     }
@@ -54,10 +59,14 @@ public class AirVehicleBalloon : AirVehicleBase
         {
             if (ska.AnimationName != "飞行")
             {
+                audioManager.PlaySound("Fire", AudioPlayMode.Wait);
                 ska.AnimationState.SetAnimation(0, "飞行", true);
             }
             currentFuel -= Time.deltaTime;
-            rb.AddForce(new Vector2(0, balloonStrength + 9.81f * rb.gravityScale));
+            var radian = Mathf.Deg2Rad * (transform.rotation.eulerAngles.z+90);
+
+            rb.AddForce(new Vector2(balloonStrength * Mathf.Cos(radian), 
+                balloonStrength * Mathf.Sin(radian) + 9.81f * rb.gravityScale));
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, 3, 0), Time.deltaTime);
             fireObject.SetActive(true);
@@ -66,6 +75,7 @@ public class AirVehicleBalloon : AirVehicleBase
         {
             if (ska.AnimationName != "下落")
             {
+                audioManager.StopSound("Fire");
                 ska.AnimationState.SetAnimation(0, "下落", true);
             }
             currentFuel = Mathf.Clamp(currentFuel + Time.deltaTime, -1000, maxFuel);
@@ -73,5 +83,10 @@ public class AirVehicleBalloon : AirVehicleBase
                 new Vector3(0, -3, 0), Time.deltaTime);
             fireObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        audioManager.StopSound("Fire");
     }
 }

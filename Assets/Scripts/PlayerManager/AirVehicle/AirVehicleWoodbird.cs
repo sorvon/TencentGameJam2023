@@ -18,9 +18,11 @@ public class AirVehicleWoodbird : AirVehicleBase
     Spine.AnimationState.TrackEntryDelegate cc;
     float flyIntervalCount = 0;
     bool flyEnd = true;
+    AudioManager audioManager;
     private void Awake()
     {
         ska = GetComponent<SkeletonAnimation>();
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 flyIntervalCount = 0;
                 ska.AnimationState.SetAnimation(0, "∆À“Ì", false);
+                audioManager.PlaySound("Fly");
                 flyEnd = false;
                 cc = delegate
                 {
@@ -51,6 +54,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             if (Input.GetButtonDown("Fire1") && flyIntervalCount >= flyInterval)
             {
                 ska.AnimationState.SetAnimation(0, "∆À“Ì", false);
+                audioManager.PlaySound("Fly");
                 flyEnd = false;
                 cc = delegate
                 {
@@ -73,6 +77,7 @@ public class AirVehicleWoodbird : AirVehicleBase
             {
                 if (ska.AnimationName != "ª¨œË")
                 {
+                    audioManager.PlaySound("Fly");
                     rb.velocity = new Vector2(rb.velocity.x, flyStrength / 5);
                     ska.AnimationState.SetAnimation(0, "ª¨œË", true);
                 }
