@@ -48,7 +48,7 @@ public class XiaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            objectManager.Activate(EObject.Bird, cameraTrans.position);
+            objectManager.Activate(EObject.Bird, cameraTrans.position+new Vector3(0,0,10));
         }
     }
 }
