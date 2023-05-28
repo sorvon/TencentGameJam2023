@@ -29,10 +29,10 @@ public class EnvGenerator : Service
     private float CameraDown => cameraTrans.position.y - camera.orthographicSize;
     private float CameraLeft => cameraTrans.position.x - camera.orthographicSize * camera.aspect; //摄像机左边界
     private float CameraRight => cameraTrans.position.x + camera.orthographicSize * camera.aspect;
-    private float SpawnUpDown => CameraUp + 0.25f * camera.orthographicSize; //生成上边界：摄像机上边界+2个屏幕高度
-    private float SpawnUpUp => CameraUp + 0.75f * camera.orthographicSize;
-    private float SpawnDownDown => CameraDown - 0.25f * camera.orthographicSize;
-    private float SpawnDownUp => CameraDown - 0.75f * camera.orthographicSize;
+    private float SpawnUpDown => CameraUp + 0.5f * camera.orthographicSize; //生成上边界：摄像机上边界+2个屏幕高度
+    private float SpawnUpUp => CameraUp + 1f * camera.orthographicSize;
+    private float SpawnDownDown => CameraDown - 2f * camera.orthographicSize;
+    private float SpawnDownUp => CameraDown - 1.5f * camera.orthographicSize;
 
     #endregion
 
