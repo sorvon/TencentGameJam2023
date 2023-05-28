@@ -13,6 +13,7 @@ public class XiaDebug : MonoBehaviour
     private LevelManager levelManager;
     private EnvGenerator generator;
     private AudioManager audiomanager;
+    private ObjectManager objectManager;
     private void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -21,6 +22,7 @@ public class XiaDebug : MonoBehaviour
         levelManager = ServiceLocator.Get<LevelManager>();
         generator = ServiceLocator.Get<EnvGenerator>();
         audiomanager = ServiceLocator.Get<AudioManager>();
+        objectManager = ServiceLocator.Get<ObjectManager>();
     }
 
     private void Update()
@@ -46,7 +48,7 @@ public class XiaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            audiomanager.PlaySound("testaudio1");
+            objectManager.Activate(EObject.Bird, cameraTrans.position+new Vector3(0,0,10));
         }
     }
 }

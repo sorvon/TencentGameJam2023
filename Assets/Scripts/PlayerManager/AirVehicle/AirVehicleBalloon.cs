@@ -65,7 +65,7 @@ public class AirVehicleBalloon : AirVehicleBase
             if (Input.GetKeyUp(KeyCode.A) && hardHorizontalIntervalCount >= hardHorizontalInterval)
             {
                 hardACount = Mathf.Clamp(hardACount, 1, 3);
-                rb.velocity = new Vector2(hardACount * hardHorizontalStrength, rb.velocity.y);
+                rb.velocity = new Vector2(-hardACount * hardHorizontalStrength, rb.velocity.y);
                 transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
                 transform.DOKill();
                 transform.DOShakeRotation(4, 10, 5, 90, true, ShakeRandomnessMode.Harmonic);
@@ -75,7 +75,7 @@ public class AirVehicleBalloon : AirVehicleBase
             else if(Input.GetKeyUp(KeyCode.D) && hardHorizontalIntervalCount >= hardHorizontalInterval)
             {
                 hardDCount = Mathf.Clamp(hardDCount, 1, 3);
-                rb.velocity = new Vector2(-hardDCount * hardHorizontalStrength, rb.velocity.y);
+                rb.velocity = new Vector2(hardDCount * hardHorizontalStrength, rb.velocity.y);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 transform.DOKill();
                 transform.DOShakeRotation(4, 10, 5, 90, true, ShakeRandomnessMode.Harmonic);
@@ -93,7 +93,7 @@ public class AirVehicleBalloon : AirVehicleBase
             HorizontalMove();
         }
         
-        if (Input.GetButton("Fire1"))
+        if (!Input.GetButton("Fire1"))
         {
             if (ska.AnimationName != "·ÉÐÐ")
             {

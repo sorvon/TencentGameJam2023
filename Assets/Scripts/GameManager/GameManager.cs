@@ -18,9 +18,9 @@ public class GameManager : Service
     }
     public void RestartGame()
     {
-        if (SceneControllerUtility.SceneIndex == 2)
+        if (SceneControllerUtility.SceneIndex == 3)
         {
-            sceneController.LoadScene(2);
+            sceneController.LoadScene(3);
             Debug.LogWarning("RestartGame");
         }
     }

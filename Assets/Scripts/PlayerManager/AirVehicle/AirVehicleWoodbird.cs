@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
+using Cinemachine;
+
 public class AirVehicleWoodbird : AirVehicleBase
 {
     [Header("Ä¾ÄñÅäÖÃ")]
@@ -9,6 +11,7 @@ public class AirVehicleWoodbird : AirVehicleBase
     public float flyInterval = 1;
     public float glideInternal = 1;
     public float maxVelocity_Y = -2;
+    [SerializeField] CinemachineVirtualCamera vcam;
 
     [Header("Debug")]    
     public bool isHard = false;
@@ -16,6 +19,8 @@ public class AirVehicleWoodbird : AirVehicleBase
     [SerializeField] float hardHorizontalInterval = 1;
     [SerializeField] Color color;
     SkeletonAnimation ska;
+    CinemachineFramingTransposer vcamTransposer;
+    
     Spine.AnimationState.TrackEntryDelegate cc;
     float flyIntervalCount = 0;
     float glideLastTime = 0;
@@ -25,6 +30,7 @@ public class AirVehicleWoodbird : AirVehicleBase
     private void Awake()
     {
         ska = GetComponent<SkeletonAnimation>();
+        vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     private void Start()
@@ -35,10 +41,14 @@ public class AirVehicleWoodbird : AirVehicleBase
     private void OnEnable()
     {
         levelManager = Services.ServiceLocator.Get<LevelManager>();
+        vcamTransposer.m_TrackedObjectOffset = new Vector3(0, 0, 0);
     }
 
     void Update()
     {
+        ska.skeleton.R = color.r;
+        ska.skeleton.G = color.g;
+        ska.skeleton.B = color.b;
         flyIntervalCount += Time.deltaTime;
         if (isHard)
         {
