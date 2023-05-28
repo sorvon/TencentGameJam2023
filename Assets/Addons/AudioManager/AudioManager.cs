@@ -115,7 +115,7 @@ public class AudioManager : Service
             case AudioPlayMode.Interrupt:
                 FixedPlay(curSources[0]);
                 break;
-            case AudioPlayMode.Plenty:
+            case AudioPlayMode.Plenty:  
                 if (plentyWaitTime > 0 && Time.time - curSound.lastPlayTime < plentyWaitTime)
                 {
                     return;
