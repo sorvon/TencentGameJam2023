@@ -9,6 +9,7 @@ public class AirVehicleBalloon : AirVehicleBase
     public float balloonStrength = 15;
     public float maxFuel = 5;
     [SerializeField] CinemachineVirtualCamera vcam;
+    [SerializeField] GameObject fireObject;
 
     CinemachineFramingTransposer vcamTransposer;
     float currentFuel;
@@ -23,18 +24,20 @@ public class AirVehicleBalloon : AirVehicleBase
     {
         Debug.Log(currentFuel);
         HorizontalMove();
-        if (Input.GetButton("Fire1") && currentFuel > 0 )
+        if (Input.GetButton("Fire1"))
         {
             currentFuel -= Time.deltaTime;
-            rb.AddForce(new Vector2(0, balloonStrength));
+            rb.AddForce(new Vector2(0, balloonStrength + 9.81f));
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, 3, 0), Time.deltaTime);
+            fireObject.SetActive(true);
         }
         else
         {
             currentFuel = Mathf.Clamp(currentFuel + Time.deltaTime, -1000, maxFuel);
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, -3, 0), Time.deltaTime);
+            fireObject.SetActive(false);
         }
     }
 }
