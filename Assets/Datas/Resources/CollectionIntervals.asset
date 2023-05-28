@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5627bb605814422a08f0985d191ef4f, type: 3}
   m_Name: CollectionIntervals
   m_EditorClassIdentifier: 
-  obstacleInterval: 2
   _intervals:
-  - type: 0
+  - type: 2
+    interval: 20
+  - type: 3
+    interval: 20
+  - type: 5
+    interval: 20
+  - type: 1
+    interval: 20
+  - type: 4
     interval: 20
