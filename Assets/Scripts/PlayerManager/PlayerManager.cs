@@ -29,13 +29,18 @@ public class PlayerManager : MonoBehaviour
             }
             airVehicleList[i].SetActive(i == airVehicleIndex);
         }
-        collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+        if (collectNumberText != null)
+        {
+            collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        heightNumberText.text = string.Format("{0:N}", transform.position.y);
-        
+        if (heightNumberText != null)
+        {
+            heightNumberText.text = string.Format("{0:N}", transform.position.y);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,11 +67,17 @@ public class PlayerManager : MonoBehaviour
                 }
                 if (airVehicleIndex < collectionCountConfig.Length)
                 {
-                    collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+                    if (collectNumberText != null)
+                    {
+                        collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+                    }
                 }
                 else
                 {
-                    collectNumberText.text = string.Format("{0}", collectionCount);
+                    if (collectNumberText != null)
+                    {
+                        collectNumberText.text = string.Format("{0}", collectionCount);
+                    }
                 }
             }
             
@@ -75,7 +86,10 @@ public class PlayerManager : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             collectionCount = Mathf.Max(collectionCount - 1, 0);
-            collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+            if (collectNumberText != null)
+            {
+                collectNumberText.text = string.Format("{0}/{1}", collectionCount, collectionCountConfig[airVehicleIndex]);
+            }
             if (currentAirVehicle.TryGetComponent(out SkeletonAnimation ska))
             {
                 StartCoroutine(SpineSkeletonFlash(ska));
