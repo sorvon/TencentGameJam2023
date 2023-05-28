@@ -23,6 +23,10 @@ public class XiaDebug : MonoBehaviour
         {
             cameraTrans.Translate(Vector2.up * (moveSpeed * Time.deltaTime));
         }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            cameraTrans.Translate(Vector2.down * (moveSpeed * Time.deltaTime));
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {

@@ -166,7 +166,8 @@ public class EnvGenerator : Service
         if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         {
             Transform coTrans = combTrans.Find("Collection");
-            objectManager.Activate(currentType, coTrans.position);
+            if(coTrans)
+                objectManager.Activate(currentType, coTrans.position);
         }
 
     }
