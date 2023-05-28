@@ -16,12 +16,14 @@ public class AirVehicleFireworks : AirVehicleBase
     [SerializeField] float fireDirection;
     CinemachineFramingTransposer vcamTransposer;
     SkeletonAnimation ska;
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Awake()
     {
         fireDirection = 0;
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
         ska = GetComponent<SkeletonAnimation>();
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class AirVehicleFireworks : AirVehicleBase
         {
             if (ska.AnimationName != "·É")
             {
+                audioManager.PlaySound("Fireworks", AudioPlayMode.Wait);
                 particle.Play();
                 ska.AnimationState.SetAnimation(0, "·É", true);
             }
@@ -50,11 +53,17 @@ public class AirVehicleFireworks : AirVehicleBase
             //rb.velocity = new Vector2(0, rb.velocity.y);
             if (ska.AnimationName != "drop")
             {
+                audioManager.StopSound("Fireworks");
                 particle.Stop(true);
                 ska.AnimationState.SetAnimation(0, "drop", true);
             }
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, -3, 0), Time.deltaTime);
         }
+    }
+
+    private void OnDisable()
+    {
+        audioManager.StopSound("Fireworks");
     }
 }

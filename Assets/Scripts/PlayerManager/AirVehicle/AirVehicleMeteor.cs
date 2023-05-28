@@ -11,12 +11,16 @@ public class AirVehicleMeteor : AirVehicleBase
     [SerializeField] CinemachineVirtualCamera vcam;
 
     CinemachineFramingTransposer vcamTransposer;
-
+    AudioManager audioManager;
     private void Awake()
     {
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        audioManager = Services.ServiceLocator.Get<AudioManager>();
     }
-
+    private void OnEnable()
+    {
+        audioManager.PlaySound("Meteor");
+    }
     void FixedUpdate()
     {
         HorizontalMove();
