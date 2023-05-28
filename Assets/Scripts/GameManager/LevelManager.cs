@@ -12,7 +12,7 @@ public class LevelManager : Service
     [SerializeField] private TextMeshProUGUI heightNumberText;
     [SerializeField] private TextMeshProUGUI collectNumberText;
     [SerializeField] private PlayerManager playerManager;
-
+    [SerializeField] private GameObject handbookObject; 
     private int collectionCount = 0;
 
     /// <summary>
@@ -30,6 +30,11 @@ public class LevelManager : Service
             if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
                 Level++;
+                if (handbookObject != null)
+                {
+                    handbookObject.SetActive(true);
+                    handbookObject.GetComponent<Animator>().SetTrigger("Open");
+                }
                 collectionCount = 0;
             }
             UpdateCollectionText();

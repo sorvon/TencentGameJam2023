@@ -59,7 +59,7 @@ public class AirVehicleFireworks : AirVehicleBase
             {
                 audioManager.PauseSound("Fireworks");
                 particle.Stop(true);
-                ska.AnimationState.SetAnimation(0, "drop", true);
+                ska.AnimationState.SetAnimation(0, "drop", false);
             }
             vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, -3, 0), Time.deltaTime);
