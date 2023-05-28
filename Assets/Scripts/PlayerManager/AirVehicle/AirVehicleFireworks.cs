@@ -53,7 +53,7 @@ public class AirVehicleFireworks : AirVehicleBase
             //rb.velocity = new Vector2(0, rb.velocity.y);
             if (ska.AnimationName != "drop")
             {
-                audioManager.StopSound("Fireworks");
+                audioManager.PauseSound("Fireworks");
                 particle.Stop(true);
                 ska.AnimationState.SetAnimation(0, "drop", true);
             }

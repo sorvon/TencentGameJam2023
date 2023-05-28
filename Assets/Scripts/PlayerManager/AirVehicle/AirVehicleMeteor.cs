@@ -32,4 +32,9 @@ public class AirVehicleMeteor : AirVehicleBase
         vcamTransposer.m_TrackedObjectOffset = Vector3.Lerp(vcamTransposer.m_TrackedObjectOffset,
                 new Vector3(0, 3, 0), Time.deltaTime);
     }
+
+    private void OnDisable()
+    {
+        audioManager.StopSound("Meteor");
+    }
 }

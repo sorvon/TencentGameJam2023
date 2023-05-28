@@ -22,6 +22,7 @@ public class AirVehicleKite : AirVehicleBase
         {
             if (ska.AnimationName != "»¬Ïè")
             {
+                rb.velocity = new Vector2(rb.velocity.x, 2);
                 audioManager.PlaySound("OpenKite");
                 ska.AnimationState.SetAnimation(0, "»¬Ïè", true);
             }
