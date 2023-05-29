@@ -12,7 +12,7 @@ namespace LevelDesign
         public override void OnInspectorGUI()
         {
             LevelGenerator handler = target as LevelGenerator;
-            EditorGUILayout.LabelField("快速工具");
+            EditorGUILayout.LabelField("快速工具", EditorStyles.boldLabel);
             if (GUILayout.Button("生成关卡"))
             {
                 handler.GenerateLevel();

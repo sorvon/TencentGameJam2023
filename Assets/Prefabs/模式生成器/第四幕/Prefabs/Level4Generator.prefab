@@ -116,11 +116,9 @@ MonoBehaviour:
   useCliff: 0
   anchorObjects: []
   floatObjects:
-  - {fileID: 5203796658266859205, guid: 529b24e507cc7bf49b9011b77bb8afba, type: 3}
   - {fileID: 31295834853989949, guid: eaa122057a39ea244b8422149872adbb, type: 3}
-  - {fileID: 7349153049253938930, guid: 4594a102035362944b402d90dacd5fea, type: 3}
-  gapX: 0.5
-  gapY: 1
+  gapX: 3.5
+  gapY: 3.91
   generateCount: 5
   retryMax: 10
   defaultTag: Combine
