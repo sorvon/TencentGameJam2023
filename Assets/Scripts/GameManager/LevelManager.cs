@@ -130,7 +130,7 @@ public class LevelManager : Service
 
     private void CheckEnd()
     {
-        if (Height > 1000)
+        if (Height > 1200)
         {
             _sceneController.LoadNextScene();
         }

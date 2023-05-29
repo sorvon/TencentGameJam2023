@@ -8,6 +8,7 @@ public class AirVehicleMeteor : AirVehicleBase
     [Header("星星配置")]
     public float meteorStrength = 15;
     public float defauleVelocity_Y = 10;
+    public float boostRate = 0.4f;
     [SerializeField] CinemachineVirtualCamera vcam;
 
     CinemachineFramingTransposer vcamTransposer;
@@ -35,7 +36,7 @@ public class AirVehicleMeteor : AirVehicleBase
     void FixedUpdate()
     {
         HorizontalMove();
-        rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(defauleVelocity_Y * (1 + 0.1f*levelManager.CollectionCount), rb.velocity.y));
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(defauleVelocity_Y * (1 + boostRate * levelManager.CollectionCount), rb.velocity.y));
         if (Input.GetButton("Fire1"))
         {
             rb.AddForce(new Vector2(0, meteorStrength));

@@ -16,7 +16,7 @@ MonoBehaviour:
   - groupType: 0
     sounds:
     - name: Level0BGM
-      audioClip: {fileID: 8300000, guid: b93c11f3d0e9e2c418eebe0ff5f24a21, type: 3}
+      audioClip: {fileID: 8300000, guid: dd5e6bd2ed373f64a8899b28fd9b6cc7, type: 3}
       initVolume: 1
       playOnAwake: 0
       loop: 1
@@ -85,13 +85,13 @@ MonoBehaviour:
       pitch: 1
     - name: Pick
       audioClip: {fileID: 8300000, guid: 97fd290c513234a4d9640c686d50ed0d, type: 3}
-      initVolume: 0.21
+      initVolume: 0.2
       playOnAwake: 0
       loop: 0
       pitch: 1
     - name: Wind
       audioClip: {fileID: 8300000, guid: 3ab11429f5d29b44ba87cbe222b20913, type: 3}
-      initVolume: 1
+      initVolume: 0.1
       playOnAwake: 0
       loop: 0
       pitch: 1

@@ -52,7 +52,7 @@ public class BGMController : MonoBehaviour
 
     public void StartGameBGM()
     {
-        audioManager.StopGroup(ESoundGroup.BGM,true);
+        audioManager.StopGroup(ESoundGroup.BGM, true);
         audioManager.PlaySound("Level0BGM");
     }
     

@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.y < -250 && !onWind)
+        if (transform.position.y < -400 && !onWind)
         {
             onWind = true;
             audioManager.PlaySound("Wind");
