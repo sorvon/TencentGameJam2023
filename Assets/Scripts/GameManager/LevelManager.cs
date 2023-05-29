@@ -15,6 +15,7 @@ public class LevelManager : Service
     [SerializeField] private GameObject handbookObject;
     [SerializeField] private Image progressMask;
     [SerializeField] private Image progressImage;
+    [SerializeField] private GameObject progressIcon;
     [SerializeField] private Sprite[] targetSprites;
     private int collectionCount = 0;
     [Other] private SceneController _sceneController;
@@ -143,11 +144,23 @@ public class LevelManager : Service
         {
             collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
             progressMask.fillAmount = (float)collectionCount / collectionCountConfig[Level];
+            var icon =  progressIcon.transform.GetChild(0);
+            var p1 = progressIcon.transform.GetChild(1);
+            var p2 = progressIcon.transform.GetChild(2);
+            icon.position = Vector3.Lerp(p1.position, p2.position, progressMask.fillAmount);
         }
         else
         {
+            if (! collectNumberText.gameObject.activeSelf)
+            {
+                collectNumberText.gameObject.SetActive(true);
+            }
             collectNumberText.text = $"{collectionCount}";
             progressMask.fillAmount = 1;
+            var icon = progressIcon.transform.GetChild(0);
+            var p1 = progressIcon.transform.GetChild(1);
+            var p2 = progressIcon.transform.GetChild(2);
+            icon.position = p2.position;
         }
         
     }
