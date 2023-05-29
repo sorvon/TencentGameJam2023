@@ -52,7 +52,7 @@ public class GeneratorConfigTransformer : Service
         }
 
         GeneratorConfig transConfig =
-            new GeneratorConfig(fl, an, config.gapX, config.gapY, config.generateCount, config.retryMax);
+            new GeneratorConfig(fl, an, config.gapX, config.gapY, config.generateCount, config.retryMax,config.useCliff);
         transConfigs.Add(transConfig);
     }
 
@@ -81,11 +81,13 @@ public class GeneratorConfigTransformer : Service
     public void ApplyConfig(int level)
     {
         mainGenerator.gapX = transConfigs[level].gapX;
-        mainGenerator.gapY = transConfigs[level].gapX;
+        mainGenerator.gapY = transConfigs[level].gapY;
         mainGenerator.generateCount = transConfigs[level].generateCount;
         mainGenerator.retryMax = transConfigs[level].retryMax;
+        mainGenerator.useCliff = transConfigs[level].useCliff;
         curAnchor = transConfigs[level].anchorTypes;
         curFloat = transConfigs[level].floatTypes;
+        
     }
 
     public void DoGenerate(Vector2 pos, bool ifGenerateCollection) =>
@@ -95,7 +97,7 @@ public class GeneratorConfigTransformer : Service
 public struct GeneratorConfig
 {
     public GeneratorConfig(List<EObject> floatTypes, List<EObject> anchorTypes, float gapX, float gapY,
-        int generateCount, int retryMax)
+        int generateCount, int retryMax,bool useCliff)
     {
         this.floatTypes = floatTypes;
         this.anchorTypes = anchorTypes;
@@ -103,6 +105,7 @@ public struct GeneratorConfig
         this.gapY = gapY;
         this.generateCount = generateCount;
         this.retryMax = retryMax;
+        this.useCliff = useCliff;
     }
 
     public List<EObject> floatTypes;
@@ -111,6 +114,7 @@ public struct GeneratorConfig
     public float gapY;
     public int generateCount;
     public int retryMax;
+    public bool useCliff;
 }
 
 [System.Serializable]

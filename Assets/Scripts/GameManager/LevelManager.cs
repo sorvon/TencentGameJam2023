@@ -18,6 +18,7 @@ public class LevelManager : Service
     [SerializeField] private GameObject progressIcon;
     [SerializeField] private Sprite[] targetSprites;
     private int collectionCount = 0;
+    [Other] private SceneController _sceneController;
 
     /// <summary>
     /// 当前收集物数量
@@ -116,6 +117,7 @@ public class LevelManager : Service
     private void Update()
     {
         UpdateHeightText();
+        CheckEnd();
     }
 
     private void UpdateHeightText()
@@ -124,6 +126,14 @@ public class LevelManager : Service
         //     return;
         //Debug.Log( $"{Height:N}");
         heightNumberText.text = $"{Height:N}";
+    }
+
+    private void CheckEnd()
+    {
+        if (Height > 1000)
+        {
+            _sceneController.LoadNextScene();
+        }
     }
 
     private void UpdateCollectionText()

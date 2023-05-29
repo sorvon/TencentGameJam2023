@@ -85,7 +85,7 @@ MonoBehaviour:
       pitch: 1
     - name: Pick
       audioClip: {fileID: 8300000, guid: 97fd290c513234a4d9640c686d50ed0d, type: 3}
-      initVolume: 1
+      initVolume: 0.21
       playOnAwake: 0
       loop: 0
       pitch: 1

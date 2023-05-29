@@ -125,6 +125,6 @@ MonoBehaviour:
   gapX: 4.9
   gapY: 8.04
   generateCount: 4
-  retryMax: 10
+  retryMax: 30
   defaultTag: Combine
   defaultLayer: Combine
