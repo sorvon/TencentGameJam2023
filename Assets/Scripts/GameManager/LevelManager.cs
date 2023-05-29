@@ -5,14 +5,17 @@ using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 public class LevelManager : Service
 {
     [SerializeField] private List<int> collectionCountConfig;
     [SerializeField] private TextMeshProUGUI heightNumberText;
     [SerializeField] private TextMeshProUGUI collectNumberText;
     [SerializeField] private PlayerManager playerManager;
-    [SerializeField] private GameObject handbookObject; 
+    [SerializeField] private GameObject handbookObject;
+    [SerializeField] private Image progressMask;
+    [SerializeField] private Image progressImage;
+    [SerializeField] private Sprite[] targetSprites;
     private int collectionCount = 0;
 
     /// <summary>
@@ -29,6 +32,7 @@ public class LevelManager : Service
             collectionCount = value;
             if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
+                progressImage.sprite = targetSprites[Level];
                 if (handbookObject != null)
                 {
                     handbookObject.SetActive(true);
@@ -37,6 +41,7 @@ public class LevelManager : Service
                 }
                 Level++;
                 collectionCount = 0;
+                //progressImage
             }
             UpdateCollectionText();
 
@@ -65,6 +70,23 @@ public class LevelManager : Service
 
     public float Height =>playerManager. transform.position.y;
 
+    private int heightLevel;
+    public int HeightLevel
+    {
+        get
+        {
+            return heightLevel;
+        }
+        set
+        {
+            if(value<=heightLevel)
+                return;
+            heightLevel = value;
+            OnHeightLevelInt?.Invoke(value);
+            Debug.Log($"当前海拔等级来到{value}");
+        }
+    }
+
     /// <summary>
     /// 无参数的升级事件
     /// </summary>
@@ -74,6 +96,8 @@ public class LevelManager : Service
     /// 有参数的升级事件
     /// </summary>
     public UnityAction<int> OnLevelUpInt;
+
+    public UnityAction<int> OnHeightLevelInt;
 
     protected override void Start()
     {
@@ -103,10 +127,12 @@ public class LevelManager : Service
         if (Level < collectionCountConfig.Count)
         {
             collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+            progressMask.fillAmount = (float)collectionCount / collectionCountConfig[Level];
         }
         else
         {
             collectNumberText.text = $"{collectionCount}";
+            progressMask.fillAmount = 1;
         }
         
     }

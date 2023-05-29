@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public enum AudioPlayMode
 
 public class AudioManager : Service
 {
-    public BGMController bgmController;
+    [NonSerialized]public BGMController bgmController;
     private SoundData soundData;
     private Dictionary<string, Sound> soundDics;
     private Dictionary<ESoundGroup, float> groupVolumeBeforeMuted;
@@ -48,8 +49,9 @@ public class AudioManager : Service
         base.Start();
         Transform managerTrans = new GameObject("AudioManager").transform;
         bgmController = managerTrans.gameObject.AddComponent<BGMController>();
-        managerTrans.SetParent(mainCamera.transform);
-        //managerTrans.SetParent(transform);
+        // managerTrans.SetParent(mainCamera.transform);
+        managerTrans.SetParent(transform);
+        DontDestroyOnLoad(managerTrans);
 
         foreach (var group in soundData.soundGroups)
         {
