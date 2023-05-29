@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5204553298410381406}
   - component: {fileID: 6325406070754868346}
-  - component: {fileID: 5268200885650683366}
+  - component: {fileID: 5722787305707131168}
   m_Layer: 6
   m_Name: "\u56FA\u5B9A\u969C\u788D\u7269_\u5CA9\u77F33_1"
   m_TagString: Obstacle
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5724013566554531917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3579614, y: 1, z: 1}
+  m_LocalPosition: {x: 1.4394, y: 0, z: 0}
+  m_LocalScale: {x: 0.5404143, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &5268200885650683366
-PolygonCollider2D:
+--- !u!61 &5722787305707131168
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,7 +95,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -108,13 +108,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.81, y: -0.08}
-      - {x: 2.3899999, y: 0.53999996}
-      - {x: -2.8799999, y: 0.53999996}
-      - {x: -2.8799999, y: -0.53999996}
-      - {x: 2.73, y: -0.53999996}
-      - {x: 2.76, y: -0.53}
-      - {x: 2.8799999, y: -0.39}
-      - {x: 2.8799999, y: -0.17999999}
+  serializedVersion: 2
+  m_Size: {x: 15.78, y: 1.09}
+  m_EdgeRadius: 0
