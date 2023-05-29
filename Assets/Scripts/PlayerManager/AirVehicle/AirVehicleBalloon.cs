@@ -93,7 +93,7 @@ public class AirVehicleBalloon : AirVehicleBase
             HorizontalMove();
         }
         
-        if (!Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (ska.AnimationName != "·ÉÐÐ")
             {
