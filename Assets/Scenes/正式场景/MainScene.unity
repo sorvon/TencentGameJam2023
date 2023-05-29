@@ -6124,11 +6124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handbookSprites:
-  - {fileID: 21300000, guid: b70c7a3baece4cd46883c66f3ca11c9b, type: 3}
-  - {fileID: 21300000, guid: 5175e4dcf34aa3d409fcc620f9675ab2, type: 3}
-  - {fileID: 21300000, guid: 8a803922d2d92e84d8c5e696b44c6621, type: 3}
-  - {fileID: 21300000, guid: d5ab5a6d4d2ce254499b7764197510fd, type: 3}
-  - {fileID: 21300000, guid: a140bcb4c8fec9e4480bdb4485c4554b, type: 3}
+  - {fileID: 21300000, guid: 161058d1d42752943abc5457c571225a, type: 3}
+  - {fileID: 21300000, guid: 7b12c772a07344443a6b92e061740e83, type: 3}
+  - {fileID: 21300000, guid: cf7a90b16bef5214f8b1a27793c40ac4, type: 3}
+  - {fileID: 21300000, guid: a0dfa9b1605530e46b0ae61c72d2f013, type: 3}
+  - {fileID: 21300000, guid: 7a0b6957a6feed5449bf95217796950e, type: 3}
 --- !u!114 &2011294315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6944,6 +6944,8 @@ MonoBehaviour:
     prefab: {fileID: 7219973168642420300, guid: ae67af2b3a1b8eb4b94fed8994a90894, type: 3}
   - type: 15
     prefab: {fileID: 31295834853989949, guid: eaa122057a39ea244b8422149872adbb, type: 3}
+  - type: 16
+    prefab: {fileID: 1547355586042875133, guid: 8db4cfd31337bf948b278aea95b0d6e3, type: 3}
 --- !u!1001 &6891174522971588529
 PrefabInstance:
   m_ObjectHideFlags: 0
