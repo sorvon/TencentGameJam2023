@@ -726,7 +726,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!114 &242925184
 MonoBehaviour:
@@ -4901,6 +4901,10 @@ PrefabInstance:
       propertyPath: vcam
       value: 
       objectReference: {fileID: 1279070372}
+    - target: {fileID: 7969232220827834793, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: cTrigger
+      value: 
+      objectReference: {fileID: 242925185}
     - target: {fileID: 7969232220827834796, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: m_Name
       value: Player

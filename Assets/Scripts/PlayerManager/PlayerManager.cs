@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject[] airVehicleList;
     [SerializeField] float invincibleTime = 3;
     [SerializeField] float obstacleStrength = 3;
+    [SerializeField] BoxCollider2D cTrigger;
 
     [Header("Debug")]
     [SerializeField] GameObject currentAirVehicle;
@@ -53,16 +54,15 @@ public class PlayerManager : MonoBehaviour
         {
             onWind = true;
             audioManager.PlaySound("Wind");
-            
+            cTrigger.size = new Vector2(60, 1500);
         }
         else if (transform.position.y > -100)
         {
             if (onWind == true)
             {
                 onWind = false;
-                _objectManager.RecycleAll();
+                cTrigger.size = new Vector2(60, 15);
             }
-            
         }
         if (onWind)
         {
