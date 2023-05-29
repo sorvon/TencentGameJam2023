@@ -57,8 +57,12 @@ public class PlayerManager : MonoBehaviour
         }
         else if (transform.position.y > -100)
         {
-            onWind = false;
-            _objectManager.RecycleAll();
+            if (onWind == true)
+            {
+                onWind = false;
+                _objectManager.RecycleAll();
+            }
+            
         }
         if (onWind)
         {
