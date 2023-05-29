@@ -5,6 +5,8 @@ using Services;
 using UnityEngine;
 using TMPro;
 using Spine.Unity;
+using Object = System.Object;
+
 public class PlayerManager : MonoBehaviour
 {
     [Header("Config")]
@@ -18,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
 
     AudioManager audioManager;
+    private ObjectManager _objectManager;
     bool isInvincible = false;
     private LevelManager levelManager;
     private int CurrentLevel => levelManager.Level;
@@ -40,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     {
         audioManager = ServiceLocator.Get<AudioManager>();
         levelManager = ServiceLocator.Get<LevelManager>();
+        _objectManager = ServiceLocator.Get<ObjectManager>();
         levelManager.OnLevelUpInt += OnLevelUp;
     }
 
@@ -49,10 +53,12 @@ public class PlayerManager : MonoBehaviour
         {
             onWind = true;
             audioManager.PlaySound("Wind");
+            
         }
         else if (transform.position.y > -100)
         {
             onWind = false;
+            _objectManager.RecycleAll();
         }
         if (onWind)
         {
