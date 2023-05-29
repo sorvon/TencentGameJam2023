@@ -114,14 +114,16 @@ MonoBehaviour:
   topRight: {fileID: 620477836}
   editorTarget: {fileID: 0}
   useCliff: 0
-  anchorObjects: []
+  anchorObjects:
+  - {fileID: 8535911896885164445, guid: 943b93a67f17afb44a934ab9f7b6c252, type: 3}
+  - {fileID: 8535911896885164445, guid: d9e75784fb028724d88ab1ec374a9b6a, type: 3}
+  - {fileID: 8535911896885164445, guid: c2ee96151889da6478389acd4a874f39, type: 3}
+  - {fileID: 8535911896885164445, guid: df8d040c7082789499c55be87e7f587e, type: 3}
   floatObjects:
   - {fileID: 1822199517588955086, guid: fd0a94a14fcdd584aa477a94b45b19d1, type: 3}
   - {fileID: 7219973168642420300, guid: ae67af2b3a1b8eb4b94fed8994a90894, type: 3}
-  - {fileID: 4484804372685385624, guid: 2e2cf07d6d00c234191b035d7f8a18b4, type: 3}
-  - {fileID: 8557162495431128622, guid: d72d8fe6230e67740a397bebf2ccc5fe, type: 3}
-  gapX: 1.5
-  gapY: 2.5
+  gapX: 4.9
+  gapY: 8.04
   generateCount: 4
   retryMax: 10
   defaultTag: Combine

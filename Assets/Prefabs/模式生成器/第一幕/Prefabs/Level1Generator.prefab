@@ -112,19 +112,19 @@ MonoBehaviour:
   collectionSize: {x: 1, y: 1}
   bottomLeft: {fileID: 192666673}
   topRight: {fileID: 620477836}
-  target: {fileID: 0}
+  editorTarget: {fileID: 0}
   useCliff: 1
   anchorObjects:
+  - {fileID: 8535911896885164445, guid: 943b93a67f17afb44a934ab9f7b6c252, type: 3}
   - {fileID: 8535911896885164445, guid: d9e75784fb028724d88ab1ec374a9b6a, type: 3}
   - {fileID: 8535911896885164445, guid: c2ee96151889da6478389acd4a874f39, type: 3}
-  - {fileID: 8535911896885164445, guid: 69f06801092884c449132bf051005866, type: 3}
   - {fileID: 8535911896885164445, guid: df8d040c7082789499c55be87e7f587e, type: 3}
-  - {fileID: 8535911896885164445, guid: 5cd96c5ea354181479ea876704384ec3, type: 3}
-  - {fileID: 8535911896885164445, guid: 943b93a67f17afb44a934ab9f7b6c252, type: 3}
-  - {fileID: 8535911896885164445, guid: c38e5748d2bb97e41846fc156310da2d, type: 3}
   floatObjects:
   - {fileID: 8535911896885164445, guid: e8a7864efe2df174babda205145a8228, type: 3}
-  gapX: 3
-  gapY: 5
-  generateCount: 3
+  - {fileID: 8535911896885164445, guid: e8a7864efe2df174babda205145a8228, type: 3}
+  gapX: 4.9
+  gapY: 8.04
+  generateCount: 7
   retryMax: 10
+  defaultTag: Combine
+  defaultLayer: Combine
