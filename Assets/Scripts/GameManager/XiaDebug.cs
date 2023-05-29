@@ -71,6 +71,11 @@ public class XiaDebug : MonoBehaviour
         {
             _generator.RuntimeGenerate(cameraTrans.position,anchorTypes,floatTypes,true,EObject.Collection);
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            sceneController.LoadNextScene();
+        }
     }
 
     private void InitGenerator()

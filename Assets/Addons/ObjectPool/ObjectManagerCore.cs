@@ -30,6 +30,14 @@ namespace Services
             return obj;
         }
 
+        internal void RecycleAll()
+        {
+            foreach (var pool in objectPools.Values)
+            {
+                pool.RecycleAll();
+            }
+        }
+
         internal ObjectPool CreatePool(EObject eObject)
         {
             GameObject obj_pool = new GameObject($"Pool:{eObject}");
