@@ -117,7 +117,9 @@ MonoBehaviour:
   anchorObjects: []
   floatObjects:
   - {fileID: 8137752862076187552, guid: 21e379c3ac9a95848ad2a553739b2394, type: 3}
-  - {fileID: 1822199517588955086, guid: fd0a94a14fcdd584aa477a94b45b19d1, type: 3}
+  - {fileID: 8137752862076187552, guid: 21e379c3ac9a95848ad2a553739b2394, type: 3}
+  - {fileID: 8137752862076187552, guid: 21e379c3ac9a95848ad2a553739b2394, type: 3}
+  - {fileID: 31295834853989949, guid: eaa122057a39ea244b8422149872adbb, type: 3}
   gapX: 4.2
   gapY: 5.77
   generateCount: 5
