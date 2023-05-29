@@ -509,6 +509,7 @@ namespace LevelDesign
                 _objectManager = ServiceLocator.Get<ObjectManager>();
             List<GenerateUnit> units = new List<GenerateUnit>();
             RuntimeGenerateCollection(units, pos);
+            generatedBounds.Clear();
             RuntimeGenerateObstacles(units, anchorTypes, floatTypes, pos);
             
             foreach (var unit in units)

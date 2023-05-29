@@ -17,7 +17,7 @@ public class CollectionDestroyer : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // Debug.Log($"TriggerExit,tag:{other.gameObject.tag}");
-        if (other.CompareTag("Collection")|| other.CompareTag("Combine"))
+        if (other.CompareTag("Collection")|| other.CompareTag("Combine")|| other.CompareTag("Obstacle"))
             other.GetComponent<IMyObject>().Recycle();
     }
 }
