@@ -234,7 +234,7 @@ namespace LevelDesign
             target.layer = LayerMask.NameToLayer(defaultLayer);
             if (target.GetComponent<MyObject>() == null) { target.AddComponent<MyObject>(); }
             if (target.GetComponent<BoxCollider2D>() == null) { target.AddComponent<BoxCollider2D>(); }
-            target.AddComponent<BoxCollider2D>().isTrigger = true;
+            target.GetComponent<BoxCollider2D>().isTrigger = true;
             return target;
         }
 
