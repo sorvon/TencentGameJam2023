@@ -8,31 +8,39 @@ using UnityEngine.Video;
 
 public class StartFilmController : MonoBehaviour
 {
+    [SerializeField] private GameObject startText;
+
     private GameManager gameManager;
     private SceneController sceneManager;
     private AudioManager audioManager;
-    [SerializeField]private VideoPlayer video;
+    [SerializeField] private VideoPlayer video;
+
     private void Start()
     {
         gameManager = ServiceLocator.Get<GameManager>();
         sceneManager = ServiceLocator.Get<SceneController>();
         audioManager = ServiceLocator.Get<AudioManager>();
-        video.Pause();
-        Invoke(nameof(StartVideo),1.5f);
+
+        StartCoroutine(nameof(GameStart));
     }
 
-    private void Update()
+    private IEnumerator GameStart()
     {
-        Debug.Log($"Length:{video.length} Current:{video.time} Percent:{video.time/video.length*100}%");
-        if (video.time / video.length * 100 > 80)
-        {
-            sceneManager.LoadNextScene();
-        }
-    }
-
-    private void StartVideo()
-    {
-        video.Play();
         audioManager.bgmController.PlayStartFilmBGM();
+        video.Pause();
+        yield return new WaitForSecondsRealtime(1.5f);
+        video.Play();
+        while (video.time / video.length * 100 < 95)
+        {
+            Debug.Log($"Length:{video.length} Current:{video.time} Percent:{video.time / video.length * 100}%");
+            yield return new WaitForFixedUpdate();
+        }
+        video.Pause();
+        StartTextAppear();
+    }
+    
+    private void StartTextAppear()
+    {
+        startText.SetActive(true);
     }
 }

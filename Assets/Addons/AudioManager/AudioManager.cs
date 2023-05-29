@@ -49,8 +49,9 @@ public class AudioManager : Service
         base.Start();
         Transform managerTrans = new GameObject("AudioManager").transform;
         bgmController = managerTrans.gameObject.AddComponent<BGMController>();
-        managerTrans.SetParent(mainCamera.transform);
-        //managerTrans.SetParent(transform);
+        // managerTrans.SetParent(mainCamera.transform);
+        managerTrans.SetParent(transform);
+        DontDestroyOnLoad(managerTrans);
 
         foreach (var group in soundData.soundGroups)
         {

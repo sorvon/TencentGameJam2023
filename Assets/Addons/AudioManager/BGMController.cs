@@ -11,12 +11,20 @@ public class BGMController : MonoBehaviour
 
     private void Start()
     {
+        eventSystem = ServiceLocator.Get<EventSystem>();
         audioManager = ServiceLocator.Get<AudioManager>();
-        levelManager = ServiceLocator.Get<LevelManager>();
-        levelManager.OnHeightLevelInt += PlayBGMOnLevelUp;
+        eventSystem.AddListener<int>(EEvent.AfterLoadScene,TryGetServices);
+        
         audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
     }
-    
+
+    private void TryGetServices(int index)
+    {
+        if(index!=2)
+            return;
+        levelManager = ServiceLocator.Get<LevelManager>();
+        levelManager.OnHeightLevelInt += PlayBGMOnLevelUp;
+    }
 
     private void PlayBGMOnLevelUp(int level)
     {
