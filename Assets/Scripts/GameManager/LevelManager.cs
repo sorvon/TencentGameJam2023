@@ -5,14 +5,15 @@ using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 public class LevelManager : Service
 {
     [SerializeField] private List<int> collectionCountConfig;
     [SerializeField] private TextMeshProUGUI heightNumberText;
     [SerializeField] private TextMeshProUGUI collectNumberText;
     [SerializeField] private PlayerManager playerManager;
-    [SerializeField] private GameObject handbookObject; 
+    [SerializeField] private GameObject handbookObject;
+    [SerializeField] private Image progressMask;
     private int collectionCount = 0;
 
     /// <summary>
@@ -122,10 +123,12 @@ public class LevelManager : Service
         if (Level < collectionCountConfig.Count)
         {
             collectNumberText.text = $"{collectionCount}/{collectionCountConfig[Level]}";
+            progressMask.fillAmount = (float)collectionCount / collectionCountConfig[Level];
         }
         else
         {
             collectNumberText.text = $"{collectionCount}";
+            progressMask.fillAmount = 1;
         }
         
     }
