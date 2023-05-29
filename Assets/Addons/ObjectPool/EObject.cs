@@ -41,7 +41,8 @@ namespace Services
         KongmLight,
         Rainbow,
         ThunderCloud,
-        FallingStar
+        FallingStar,
+        Collection
 
     }
 }

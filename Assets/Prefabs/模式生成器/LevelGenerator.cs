@@ -318,7 +318,7 @@ namespace LevelDesign
                 break;
             }
         }
-        private void RuntimeGenerateCollection(Transform parent)
+        private void RuntimeGenerateCollection(List<GenerateUnit> units,Vector2 generatePos)
         {
             Vector2 xy = Vector2.zero;
             Bounds bounds = new(xy, collectionSize);
@@ -326,12 +326,12 @@ namespace LevelDesign
 
             for (int i = 0; i < retryMax; i++)
             {
-                xy = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY));
+                xy = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY))+generatePos;
                 bounds = new Bounds(xy, collectionSize);
 
                 // 检查是否超出边界
                 // 检查是否处与障碍区域相交
-                if (InRegion(bounds) && !IntersectWithObstacle(bounds))
+                if (InRegion(bounds,generatePos) && !IntersectWithObstacle(bounds))
                 {
                     check = true;
                     break;
@@ -341,10 +341,12 @@ namespace LevelDesign
             var newCollection = Instantiate(collection);
             newCollection.name = newCollection.name.Replace("(Clone)", "");
             xy = check ? xy : CenterXY;
+            var newPos = xy;
             newCollection.transform.position = xy;
-            newCollection.transform.SetParent(parent);
+            // newCollection.transform.SetParent(parent);
             bounds = new(xy, collectionSize);
             bounds.Expand(new Vector2(gapX, gapY) * 2f);
+            units.Add(new GenerateUnit(newPos,EObject.Collection,Quaternion.Euler(0,0,0)));
             generatedBounds.Add(bounds);
         }
 
@@ -495,16 +497,24 @@ namespace LevelDesign
             return target;
         }
 
-        public void RuntimeGenerate(Vector2 pos,List<EObject> anchorTypes,List<EObject> floatTypes)
+        public void RuntimeGenerate(Vector2 pos,List<EObject> anchorTypes,List<EObject> floatTypes,bool ifGenerateCollection,EObject type)
         {
             if (!_objectManager)
                 _objectManager = ServiceLocator.Get<ObjectManager>();
             List<GenerateUnit> units = new List<GenerateUnit>();
             RuntimeGenerateObstacles(units,anchorTypes,floatTypes,pos);
+            RuntimeGenerateCollection(units, pos);
             foreach (var unit in units)
             {
-                Transform unitTrans = _objectManager.Activate(unit.type, unit.unitPos).Transform;
-                unitTrans.rotation = unit.rotation;  
+                if(unit.type!=EObject.Collection)
+                {
+                    Transform unitTrans = _objectManager.Activate(unit.type, unit.unitPos).Transform;
+                    unitTrans.rotation = unit.rotation;
+                }
+
+                if (type == EObject.Collection) return;
+                Transform coTrans = _objectManager.Activate(type, unit.unitPos).Transform;
+                coTrans.rotation = unit.rotation;
             }
         }
     }

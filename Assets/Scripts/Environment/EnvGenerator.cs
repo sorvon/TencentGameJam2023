@@ -109,10 +109,12 @@ public class EnvGenerator : Service
         EObject combination = combineTypes[Random.Range(0, combineTypes.Count)];
 
         generateX = cameraTrans.position.x;
+        Collection co = collections[currentType];
         if ((lastCombinePos - CurrentHeight) > 0)
         {
+            bool ifGenerateCollection = (Mathf.Abs(co.lastPos - CurrentHeight) > co.interval);
             generateY = CameraDown - 2 * camera.orthographicSize;
-            generator.DoGenerate(new Vector2(generateX,generateY));
+            generator.DoGenerate(new Vector2(generateX, generateY),ifGenerateCollection);
             // // Debug.Log("DownGenerate");
             // do
             // {
@@ -125,8 +127,9 @@ public class EnvGenerator : Service
         }
         else
         {
+            bool ifGenerateCollection = (Mathf.Abs(co.lastPos - CurrentHeight) > co.interval);
             generateY = CameraUp + 2 * camera.orthographicSize;
-            generator.DoGenerate(new Vector2(generateX,generateY));
+            generator.DoGenerate(new Vector2(generateX, generateY),ifGenerateCollection);
             // Debug.Log("UpGenerate");
             // do
             // {
@@ -146,7 +149,7 @@ public class EnvGenerator : Service
         // }
 
         //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
-        Collection co = collections[currentType];
+
         // Transform combTrans = objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
         // if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
         // {

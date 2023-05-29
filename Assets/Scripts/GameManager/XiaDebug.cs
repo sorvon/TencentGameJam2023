@@ -69,7 +69,7 @@ public class XiaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            _generator.RuntimeGenerate(cameraTrans.position,anchorTypes,floatTypes);
+            _generator.RuntimeGenerate(cameraTrans.position,anchorTypes,floatTypes,true,EObject.Collection);
         }
     }
 

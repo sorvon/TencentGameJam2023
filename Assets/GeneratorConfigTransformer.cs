@@ -14,6 +14,8 @@ public class GeneratorConfigTransformer : Service
     private LevelGenerator mainGenerator;
     private Dictionary<EObject, GameObject> e2ObjDict;
     private Dictionary<GameObject, EObject> obj2EDict;
+    private Dictionary<int, EObject> level2collection;
+
     private List<GeneratorConfig> transConfigs;
 
     private List<EObject> curAnchor;
@@ -56,6 +58,15 @@ public class GeneratorConfigTransformer : Service
 
     private void InitDict()
     {
+        level2collection= new Dictionary<int, EObject>()
+        {
+            { 0, EObject.Kite },
+            { 1, EObject.Feather },
+            { 2, EObject.Firecracker },
+            { 3, EObject.Kindling },
+            { 4, EObject.Star },
+            { 5, EObject.Star }
+        };
         e2ObjDict = new Dictionary<EObject, GameObject>();
         obj2EDict = new Dictionary<GameObject, EObject>();
         foreach (var pair in e2Objs)
@@ -63,6 +74,7 @@ public class GeneratorConfigTransformer : Service
             e2ObjDict.Add(pair.type, pair.prefab);
             obj2EDict.Add(pair.prefab, pair.type);
         }
+
         mainGenerator.InitE2ObjDict(e2ObjDict);
     }
 
@@ -76,7 +88,8 @@ public class GeneratorConfigTransformer : Service
         curFloat = transConfigs[level].floatTypes;
     }
 
-    public void DoGenerate(Vector2 pos) => mainGenerator.RuntimeGenerate(pos, curAnchor, curFloat);
+    public void DoGenerate(Vector2 pos, bool ifGenerateCollection) =>
+        mainGenerator.RuntimeGenerate(pos, curAnchor, curFloat, ifGenerateCollection,level2collection[levelManager.Level]);
 }
 
 public struct GeneratorConfig
