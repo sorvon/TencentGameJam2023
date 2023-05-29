@@ -151,6 +151,10 @@ public class LevelManager : Service
         }
         else
         {
+            if (! collectNumberText.gameObject.activeSelf)
+            {
+                collectNumberText.gameObject.SetActive(true);
+            }
             collectNumberText.text = $"{collectionCount}";
             progressMask.fillAmount = 1;
             var icon = progressIcon.transform.GetChild(0);
