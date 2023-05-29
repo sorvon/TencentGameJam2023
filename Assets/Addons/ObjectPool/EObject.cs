@@ -31,7 +31,7 @@ namespace Services
         /// 炮仗
         /// </summary>
         Firecracker,
-        
+
         C01,
         C02,
         C03,
@@ -60,5 +60,30 @@ namespace Services
         C211,
         C212,
         Bird,
+        C07,
+        C08,
+        C09,
+        C010,
+        C011,
+        C012,
+        C013,
+        C014,
+        C015,
+        C016,
+        C110,
+        C111,
+        C112,
+        C113,
+        C114,
+        C115,
+        C116,
+        C31,
+        C32,
+        C33,
+        C34,
+        C35,
+        C36,
+        C41,
+        C42
     }
 }

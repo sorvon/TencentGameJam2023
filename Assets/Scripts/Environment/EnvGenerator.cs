@@ -88,7 +88,7 @@ public class EnvGenerator : Service
     private void ReadLevelConfig()
     {
         //TODO: 等配置
-        if(currentLevel>2)
+        if(currentLevel>4)
             return;
         CombineConfig config = Resources.Load<CombineConfig>($"CombineConfig{currentLevel}");
         combineInterval = config.obstacleInterval;
