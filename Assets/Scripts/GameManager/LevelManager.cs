@@ -14,6 +14,8 @@ public class LevelManager : Service
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private GameObject handbookObject;
     [SerializeField] private Image progressMask;
+    [SerializeField] private Image progressImage;
+    [SerializeField] private Sprite[] targetSprites;
     private int collectionCount = 0;
 
     /// <summary>
@@ -30,6 +32,7 @@ public class LevelManager : Service
             collectionCount = value;
             if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
+                progressImage.sprite = targetSprites[Level];
                 if (handbookObject != null)
                 {
                     handbookObject.SetActive(true);
@@ -38,6 +41,7 @@ public class LevelManager : Service
                 }
                 Level++;
                 collectionCount = 0;
+                //progressImage
             }
             UpdateCollectionText();
 
