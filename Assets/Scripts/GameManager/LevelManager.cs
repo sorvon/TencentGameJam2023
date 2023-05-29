@@ -32,7 +32,7 @@ public class LevelManager : Service
             collectionCount = value;
             if (Level < collectionCountConfig.Count && collectionCount >= collectionCountConfig[Level])
             {
-                progressImage.sprite = targetSprites[Level];
+                
                 if (handbookObject != null)
                 {
                     handbookObject.SetActive(true);
@@ -41,7 +41,12 @@ public class LevelManager : Service
                 }
                 Level++;
                 collectionCount = 0;
-                //progressImage
+                if (Level < targetSprites.Length)
+                {
+                    progressImage.sprite = targetSprites[Level];
+                }
+                
+                
             }
             UpdateCollectionText();
 

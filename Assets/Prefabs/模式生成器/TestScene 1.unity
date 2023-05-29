@@ -847,10 +847,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1540393395043527793, guid: 20ab44110d37f2844bbf507ec0bcb901, type: 3}
-      propertyPath: editorTarget
-      value: 
-      objectReference: {fileID: 707629690}
     - target: {fileID: 1540393395043527794, guid: 20ab44110d37f2844bbf507ec0bcb901, type: 3}
       propertyPath: m_Name
       value: Level1Generator
@@ -1021,10 +1017,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1540393395043527793, guid: a4761185432d748498532d7ba0d8d445, type: 3}
-      propertyPath: editorTarget
-      value: 
-      objectReference: {fileID: 707629690}
     - target: {fileID: 1540393395043527794, guid: a4761185432d748498532d7ba0d8d445, type: 3}
       propertyPath: m_Name
       value: Level3Generator
@@ -2584,10 +2576,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1540393395043527793, guid: bd16cb87ef47dc44f80dade2126f3972, type: 3}
-      propertyPath: editorTarget
-      value: 
-      objectReference: {fileID: 707629690}
     - target: {fileID: 1540393395043527794, guid: bd16cb87ef47dc44f80dade2126f3972, type: 3}
       propertyPath: m_Name
       value: Level4Generator
@@ -4404,14 +4392,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1540393395043527793, guid: 92985fb6d61ac084d9c98b68542dd8ef, type: 3}
-      propertyPath: useCliff
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1540393395043527793, guid: 92985fb6d61ac084d9c98b68542dd8ef, type: 3}
-      propertyPath: editorTarget
-      value: 
-      objectReference: {fileID: 707629690}
     - target: {fileID: 1540393395043527794, guid: 92985fb6d61ac084d9c98b68542dd8ef, type: 3}
       propertyPath: m_Name
       value: Level2Generator

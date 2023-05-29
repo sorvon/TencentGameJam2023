@@ -117,15 +117,9 @@ MonoBehaviour:
   anchorObjects: []
   floatObjects:
   - {fileID: 8137752862076187552, guid: 21e379c3ac9a95848ad2a553739b2394, type: 3}
-  - {fileID: 4016191568555820533, guid: 2c59b8298e75b6f438d4ee765bc9126e, type: 3}
-  - {fileID: 9127674500827390380, guid: c202143ab541cce4898e02aa44903d55, type: 3}
-  - {fileID: 2562131042390450118, guid: fe3fae0c0350d194aa74517c6a3aaa15, type: 3}
-  - {fileID: 5824424928993511457, guid: 8c3aa6b696542d14aaca8de216250128, type: 3}
-  - {fileID: 4487481636300743149, guid: 8efaf4f3025256c4793ab56c27bde002, type: 3}
-  - {fileID: 5064686651612556497, guid: 528cd6262b5ca8c4aac795589c908123, type: 3}
-  - {fileID: 6570963094975124065, guid: 5d5258a38cccd1040b8db4a3780b57b7, type: 3}
-  gapX: 1
-  gapY: 1
+  - {fileID: 1822199517588955086, guid: fd0a94a14fcdd584aa477a94b45b19d1, type: 3}
+  gapX: 4.2
+  gapY: 5.77
   generateCount: 5
   retryMax: 10
   defaultTag: Combine

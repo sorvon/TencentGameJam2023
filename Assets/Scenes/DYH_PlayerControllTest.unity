@@ -1735,6 +1735,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a803922d2d92e84d8c5e696b44c6621, type: 3}
   - {fileID: 21300000, guid: d5ab5a6d4d2ce254499b7764197510fd, type: 3}
   - {fileID: 21300000, guid: a140bcb4c8fec9e4480bdb4485c4554b, type: 3}
+  - {fileID: 21300000, guid: a140bcb4c8fec9e4480bdb4485c4554b, type: 3}
 --- !u!1 &495682406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6751,6 +6752,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 165148052, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1551444643, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6812,9 +6817,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7969232220827834793, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: invincibleTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969232220827834793, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: heightNumberText
       value: 
       objectReference: {fileID: 253424813}
+    - target: {fileID: 7969232220827834793, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
+      propertyPath: obstacleStrength
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7969232220827834793, guid: 822b2cda11500cb4fa8b16785e9d3506, type: 3}
       propertyPath: collectNumberText
       value: 

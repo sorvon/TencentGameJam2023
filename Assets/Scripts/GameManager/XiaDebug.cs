@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LevelDesign;
 using Services;
 using UnityEngine;
 
 public class XiaDebug : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3;
+    [SerializeField] private LevelGenerator _generator;
     new private Camera camera;
     private Transform cameraTrans;
     private GameManager manager;
@@ -14,6 +16,13 @@ public class XiaDebug : MonoBehaviour
     private EnvGenerator generator;
     private AudioManager audiomanager;
     private ObjectManager objectManager;
+    private SceneController sceneController;
+
+    private Dictionary<EObject, GameObject> e2obj;
+    public List<EObject> anchorTypes;
+    public List<GameObject> anchorObjs;
+    public List<EObject> floatTypes;
+    public List<GameObject> floatObjs;
     private void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -23,6 +32,8 @@ public class XiaDebug : MonoBehaviour
         generator = ServiceLocator.Get<EnvGenerator>();
         audiomanager = ServiceLocator.Get<AudioManager>();
         objectManager = ServiceLocator.Get<ObjectManager>();
+        sceneController = ServiceLocator.Get<SceneController>();
+        InitGenerator();
     }
 
     private void Update()
@@ -50,5 +61,29 @@ public class XiaDebug : MonoBehaviour
         {
             objectManager.Activate(EObject.Bird, cameraTrans.position+new Vector3(0,0,10));
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            sceneController.LoadNextScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            _generator.RuntimeGenerate(cameraTrans,anchorTypes,floatTypes);
+        }
+    }
+
+    private void InitGenerator()
+    {
+        e2obj = new Dictionary<EObject, GameObject>();
+        for (int i = 0; i < floatTypes.Count; i++)
+        {
+            e2obj.Add(floatTypes[i],floatObjs[i]);
+        }
+        for (int i = 0; i < anchorTypes.Count; i++)
+        {
+            e2obj.Add(anchorTypes[i],anchorObjs[i]);
+        }
+        _generator.InitE2ObjDict(e2obj);
     }
 }

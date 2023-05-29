@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Config")]
     [SerializeField] GameObject[] airVehicleList;
     [SerializeField] float invincibleTime = 3;
+    [SerializeField] float obstacleStrength = 3;
 
     [Header("Debug")]
     [SerializeField] GameObject currentAirVehicle;
@@ -53,7 +54,9 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.CompareTag("Obstacle") && !isInvincible)
         {
-            rb.velocity = Vector2.zero;
+            var direction2D = -rb.velocity.normalized;
+            Debug.Log(direction2D * obstacleStrength);
+            rb.velocity = direction2D * obstacleStrength;
             levelManager.CollectionCount--;
             if (currentAirVehicle.TryGetComponent(out SkeletonAnimation ska))
             {

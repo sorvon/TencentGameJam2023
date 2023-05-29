@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4006582539357771640}
   - component: {fileID: 2749472746635395500}
   - component: {fileID: 2937186317322805523}
+  - component: {fileID: -631731210597053199}
   m_Layer: 6
   m_Name: "\u56E2\u7D6E"
   m_TagString: Obstacle
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: a416300029d943541bc48177cfb294f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d003dfd8ddf669a4eafcf07c041c78af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +103,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.8055556, y: 1.1018518}
+    oldSize: {x: 1.7, y: 1.51}
     newSize: {x: 1.92, y: 2.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -114,3 +115,15 @@ PolygonCollider2D:
       - {x: -0.9027778, y: -0.5509259}
       - {x: 0.9027778, y: -0.5509259}
       - {x: 0.9027778, y: 0.5509259}
+--- !u!114 &-631731210597053199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535911896885164445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec26b929c6706448ae56c79dcb226d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
