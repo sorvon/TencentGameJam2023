@@ -14,6 +14,7 @@ public class EnvGenerator : Service
     [Other] private LevelManager levelManager;
     private Dictionary<EObject, Collection> collections;
     private Dictionary<int, EObject> level2collection;
+    [Other] private GeneratorConfigTransformer generator;
 
     new private Camera camera;
 
@@ -65,11 +66,10 @@ public class EnvGenerator : Service
         foreach (var interval in config._intervals)
         {
             Collection collection = new Collection(interval.type, interval.interval);
-            if (! collections.ContainsKey(interval.type))
+            if (!collections.ContainsKey(interval.type))
             {
                 collections.Add(interval.type, collection);
             }
-            
         }
 
         level2collection = new Dictionary<int, EObject>()
@@ -88,7 +88,7 @@ public class EnvGenerator : Service
     private void ReadLevelConfig()
     {
         //TODO: 等配置
-        if(currentLevel>4)
+        if (currentLevel > 4)
             return;
         CombineConfig config = Resources.Load<CombineConfig>($"CombineConfig{currentLevel}");
         combineInterval = config.obstacleInterval;
@@ -108,38 +108,42 @@ public class EnvGenerator : Service
         int tryCount = 0;
         EObject combination = combineTypes[Random.Range(0, combineTypes.Count)];
 
-
+        generateX = cameraTrans.position.x;
         if ((lastCombinePos - CurrentHeight) > 0)
         {
-            // Debug.Log("DownGenerate");
-            do
-            {
-                tryCount++;
-                generateX = cameraTrans.position.x;
-                // generateY = Random.Range(SpawnDownDown, SpawnDownUp);
-                generateY = CameraDown - 2*camera.orthographicSize;
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
-                     tryCount < 25); //防止卡死
+            generateY = CameraDown - 2 * camera.orthographicSize;
+            generator.DoGenerate(new Vector2(generateX,generateY));
+            // // Debug.Log("DownGenerate");
+            // do
+            // {
+            //     tryCount++;
+            //     generateX = cameraTrans.position.x;
+            //     // generateY = Random.Range(SpawnDownDown, SpawnDownUp);
+            //     generateY = CameraDown - 2*camera.orthographicSize;
+            // } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
+            //          tryCount < 25); //防止卡死
         }
         else
         {
+            generateY = CameraUp + 2 * camera.orthographicSize;
+            generator.DoGenerate(new Vector2(generateX,generateY));
             // Debug.Log("UpGenerate");
-            do
-            {
-                tryCount++;
-                generateX = cameraTrans.position.x;
-                // generateY = Random.Range(SpawnUpDown, SpawnUpUp);
-                generateY = CameraUp +2* camera.orthographicSize;
-            } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
-                     tryCount < 25);
+            // do
+            // {
+            //     tryCount++;
+            //     generateX = cameraTrans.position.x;
+            //     // generateY = Random.Range(SpawnUpDown, SpawnUpUp);
+            //     generateY = CameraUp +2* camera.orthographicSize;
+            // } while (Physics2D.OverlapCircle(new Vector2(generateX, generateY), 4.5f, LayerMask.GetMask("EnvItem")) &&
+            //          tryCount < 25);
         }
 
         lastCombinePos = CurrentHeight;
-        if (tryCount >= 25)
-        {
-            Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的组合");
-            return;
-        }
+        // if (tryCount >= 25)
+        // {
+        //     Debug.LogWarning("不能在指定范围内生成不与其他物体不重叠的组合");
+        //     return;
+        // }
 
         //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
         Collection co = collections[currentType];
@@ -161,7 +165,7 @@ public class EnvGenerator : Service
 
 public class GenerateUnit
 {
-    public GenerateUnit(Vector2 unitPos, EObject type,Quaternion rotation)
+    public GenerateUnit(Vector2 unitPos, EObject type, Quaternion rotation)
     {
         this.unitPos = unitPos;
         this.type = type;

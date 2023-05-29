@@ -51,7 +51,7 @@ public class LevelUpTitle : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         title.color = Color.white;
-        yield return new WaitForSecondsRealtime(stopTime);
+        yield return new WaitForSeconds(stopTime);
         timer = 0;
         while (timer < exitTime)
         {

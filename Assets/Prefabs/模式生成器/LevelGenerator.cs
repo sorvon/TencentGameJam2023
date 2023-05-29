@@ -153,9 +153,9 @@ namespace LevelDesign
             return Bound.Contains(bounds.min) && Bound.Contains(bounds.max);
         }
 
-        private bool InRegion(Bounds bounds, Transform generatePos)
+        private bool InRegion(Bounds bounds, Vector2 generatePos)
         {
-            Bounds cameraBound = new Bounds(CenterXY + (Vector2)generatePos.position, SizeXY);
+            Bounds cameraBound = new Bounds(CenterXY + (Vector2)generatePos, SizeXY);
             return cameraBound.Contains(bounds.min) && cameraBound.Contains(bounds.max);
         }
 
@@ -227,7 +227,7 @@ namespace LevelDesign
         /// 运行时使用
         /// </summary>
         /// <returns></returns>
-        public void RuntimeGenerateObstacles(List<GenerateUnit> units, List<EObject> anchorTypes,List<EObject> floatTypes, Transform generatePos)
+        public void RuntimeGenerateObstacles(List<GenerateUnit> units, List<EObject> anchorTypes,List<EObject> floatTypes, Vector2 generatePos)
         {
             generatedBounds.Clear();
             int thresh = anchorTypes.Count;
@@ -247,7 +247,7 @@ namespace LevelDesign
         }
 
         private void RuntimeGenerateAnchorObstacle(int sel, List<GenerateUnit> units, List<EObject> anchortypes,
-            Transform generatePos)
+            Vector2 generatePos)
         {
             for (int i = 0; i < retryMax; i++)
             {
@@ -257,7 +257,7 @@ namespace LevelDesign
                 Vector2 bdSize = e2obj[anchortypes[sel]].GetComponent<SpriteRenderer>().bounds.size;
                 Vector2 center = new Vector2(anchorRight ? MaxX - 0.5f * bdSize.x : MinX + 0.5f * bdSize.x,
                     Random.Range(MinY, MaxY));
-                center += (Vector2)generatePos.position;
+                center += (Vector2)generatePos;
                 Bounds bounds = new Bounds(center, bdSize);
 
                 // 检查是否超出边界
@@ -289,13 +289,13 @@ namespace LevelDesign
         }
 
         private void RuntimeGenerateFloatObstacle(int sel, List<GenerateUnit> units, List<EObject> floatTypes,
-            Transform generatePos)
+            Vector2 generatePos)
         {
             for (int i = 0; i < retryMax; i++)
             {
                 Vector2 bdSize = e2obj[floatTypes[sel]].GetComponent<SpriteRenderer>().bounds.size;
                 Vector2 center = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY));
-                center += (Vector2)generatePos.position;
+                center += (Vector2)generatePos;
                 Bounds bounds = new Bounds(center, bdSize);
 
                 // 检查是否超出边界
@@ -317,6 +317,35 @@ namespace LevelDesign
                 generatedBounds.Add(bounds);
                 break;
             }
+        }
+        private void RuntimeGenerateCollection(Transform parent)
+        {
+            Vector2 xy = Vector2.zero;
+            Bounds bounds = new(xy, collectionSize);
+            bool check = false;
+
+            for (int i = 0; i < retryMax; i++)
+            {
+                xy = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY));
+                bounds = new Bounds(xy, collectionSize);
+
+                // 检查是否超出边界
+                // 检查是否处与障碍区域相交
+                if (InRegion(bounds) && !IntersectWithObstacle(bounds))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            var newCollection = Instantiate(collection);
+            newCollection.name = newCollection.name.Replace("(Clone)", "");
+            xy = check ? xy : CenterXY;
+            newCollection.transform.position = xy;
+            newCollection.transform.SetParent(parent);
+            bounds = new(xy, collectionSize);
+            bounds.Expand(new Vector2(gapX, gapY) * 2f);
+            generatedBounds.Add(bounds);
         }
 
         public void InitE2ObjDict(Dictionary<EObject, GameObject> dict)
@@ -466,12 +495,12 @@ namespace LevelDesign
             return target;
         }
 
-        public void RuntimeGenerate(Transform cameraTrans,List<EObject> anchorTypes,List<EObject> floatTypes)
+        public void RuntimeGenerate(Vector2 pos,List<EObject> anchorTypes,List<EObject> floatTypes)
         {
             if (!_objectManager)
                 _objectManager = ServiceLocator.Get<ObjectManager>();
             List<GenerateUnit> units = new List<GenerateUnit>();
-            RuntimeGenerateObstacles(units,anchorTypes,floatTypes,cameraTrans);
+            RuntimeGenerateObstacles(units,anchorTypes,floatTypes,pos);
             foreach (var unit in units)
             {
                 Transform unitTrans = _objectManager.Activate(unit.type, unit.unitPos).Transform;

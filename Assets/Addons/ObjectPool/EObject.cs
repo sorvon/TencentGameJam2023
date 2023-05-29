@@ -33,9 +33,15 @@ namespace Services
         Firecracker,
 
         Bird,
-        Test1,
-        Test2,
-        Test3
-  
+        Tree,
+        Stone1,
+        Stone2,
+        Stone3,
+        Tuanxu,
+        KongmLight,
+        Rainbow,
+        ThunderCloud,
+        FallingStar
+
     }
 }
