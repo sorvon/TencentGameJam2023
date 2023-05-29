@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     bool isInvincible = false;
     private LevelManager levelManager;
     private int CurrentLevel => levelManager.Level;
+    bool onWind = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,10 +43,33 @@ public class PlayerManager : MonoBehaviour
         levelManager.OnLevelUpInt += OnLevelUp;
     }
 
+    private void FixedUpdate()
+    {
+        if (transform.position.y < -250 && !onWind)
+        {
+            onWind = true;
+            audioManager.PlaySound("Wind");
+        }
+        else if (transform.position.y > -100)
+        {
+            onWind = false;
+        }
+        if (onWind)
+        {
+            var v =  transform.position;
+            v.y = Mathf.Lerp(v.y, -80, Time.deltaTime * 0.5f);
+            transform.position = v;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (onWind)
+        {
+            return;
+        }
         if (collision.CompareTag("Collection"))
         {
             collision.GetComponent<Services.IMyObject>().Recycle();
@@ -63,8 +87,6 @@ public class PlayerManager : MonoBehaviour
                 StartCoroutine(SpineSkeletonFlash(ska));
             }
         }
-        
-        
     }
 
     IEnumerator SpineSkeletonFlash(SkeletonAnimation skeletonAnimation)
