@@ -5873,12 +5873,14 @@ MonoBehaviour:
   rb: {fileID: 7969232220827834795}
   horizontalVelocity: 3
   flyStrength: 5
-  flyInterval: 1
-  glideInternal: 1
+  flyInterval: 0.8
+  glideInternal: 0.5
   maxVelocity_Y: -2
+  vcam: {fileID: 0}
   isHard: 1
-  hardHorizontalStrength: 5
-  hardHorizontalInterval: 1
+  hardHorizontalStrength: 6
+  hardHorizontalInterval: 0.2
+  color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!33 &2068015912
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6017,6 +6019,7 @@ MonoBehaviour:
   rb: {fileID: 7969232220827834795}
   horizontalVelocity: 3
   maxVelocity_Y: -2
+  glideInternal: 0.5
 --- !u!33 &165148052
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6125,7 +6128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7969232220402279835
 Transform:
   m_ObjectHideFlags: 0
@@ -6163,7 +6166,7 @@ MonoBehaviour:
   fireObject: {fileID: 2043345564}
   isHard: 1
   hardHorizontalStrength: 5
-  hardHorizontalInterval: 1
+  hardHorizontalInterval: 0.5
   hardACount: 0
   hardDCount: 0
 --- !u!33 &1551444643
@@ -6342,7 +6345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822c4c3590c61514bb2e00a37ce3b929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectionCountConfig: 020000000400000006000000080000000a000000
   airVehicleList:
   - {fileID: 7969232219352558150}
   - {fileID: 7969232220301734621}
@@ -6350,8 +6352,6 @@ MonoBehaviour:
   - {fileID: 7969232219274460500}
   - {fileID: 7969232220402279834}
   - {fileID: 7969232220944675389}
-  heightNumberText: {fileID: 0}
-  collectNumberText: {fileID: 0}
   invincibleTime: 3
   currentAirVehicle: {fileID: 0}
   airVehicleIndex: 0
@@ -6383,8 +6383,8 @@ Transform:
   m_GameObject: {fileID: 7969232220944675389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7969232220827834797}
   m_RootOrder: 5
@@ -6402,7 +6402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7969232220827834795}
-  horizontalVelocity: 6
+  horizontalVelocity: 9
   meteorStrength: 50
   defauleVelocity_Y: 10
   vcam: {fileID: 0}
@@ -6447,7 +6447,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 4a0aca3a5f2effb41b43cc0a1661d845, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73c94d819b1505c45809ec9915322455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
