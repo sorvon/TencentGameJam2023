@@ -12,6 +12,7 @@ public class AirVehicleMeteor : AirVehicleBase
 
     CinemachineFramingTransposer vcamTransposer;
     AudioManager audioManager;
+    LevelManager levelManager;
     private void Awake()
     {
         vcamTransposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -21,6 +22,7 @@ public class AirVehicleMeteor : AirVehicleBase
     private void Start()
     {
         audioManager = Services.ServiceLocator.Get<AudioManager>();
+        levelManager = Services.ServiceLocator.Get<LevelManager>();
     }
     private void OnEnable()
     {
@@ -33,7 +35,7 @@ public class AirVehicleMeteor : AirVehicleBase
     void FixedUpdate()
     {
         HorizontalMove();
-        rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(defauleVelocity_Y, rb.velocity.y));
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(defauleVelocity_Y * (1 + 0.1f*levelManager.CollectionCount), rb.velocity.y));
         if (Input.GetButton("Fire1"))
         {
             rb.AddForce(new Vector2(0, meteorStrength));
