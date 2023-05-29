@@ -35,8 +35,7 @@ namespace Services
             => core.Activate(eObject, position, new Vector3(0f, 0f, eulerAngleZ), parent);
         public IMyObject Activate(EObject eObject, Vector3 position, Transform parent)
             => core.Activate(eObject, position, Vector3.zero, parent);
-
-        public void RecycleAll() => core.RecycleAll();
+        
 
         /// <summary>
         /// 预生成物体

@@ -32,14 +32,7 @@ namespace Services
         {
             myObjects.Enqueue(myObject);
         }
-
-        internal void RecycleAll()
-        {
-            while (!(myObjects.Count == 0))
-            {
-                myObjects.Peek().Recycle();
-            }
-        }
+        
 
         internal void Create(int count = 1)
         {
