@@ -15,7 +15,7 @@ public class BGMController : MonoBehaviour
         audioManager = ServiceLocator.Get<AudioManager>();
         eventSystem.AddListener<int>(EEvent.AfterLoadScene,TryGetServices);
         
-        audioManager.SetGroupVolume(ESoundGroup.BGM,0.6f);
+        audioManager.SetGroupVolume(ESoundGroup.BGM,0.8f);
     }
 
     private void TryGetServices(int index)

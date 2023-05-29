@@ -32,7 +32,7 @@ public class StartFilmController : MonoBehaviour
         video.Play();
         while (video.time / video.length * 100 < 95)
         {
-            Debug.Log($"Length:{video.length} Current:{video.time} Percent:{video.time / video.length * 100}%");
+            // Debug.Log($"Length:{video.length} Current:{video.time} Percent:{video.time / video.length * 100}%");
             yield return new WaitForFixedUpdate();
         }
         video.Pause();

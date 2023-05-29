@@ -143,13 +143,13 @@ public class EnvGenerator : Service
 
         //若距离上一次收集物生成未达到间隔则将组合中的收集物Disable
         Collection co = collections[currentType];
-        Transform combTrans = objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
-        if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
-        {
-            Transform coTrans = combTrans.Find("Collection");
-            if (coTrans)
-                objectManager.Activate(currentType, coTrans.position);
-        }
+        // Transform combTrans = objectManager.Activate(combination, new Vector2(generateX, generateY)).Transform;
+        // if ((Mathf.Abs(co.lastPos - CurrentHeight) > co.interval))
+        // {
+        //     Transform coTrans = combTrans.Find("Collection");
+        //     if (coTrans)
+        //         objectManager.Activate(currentType, coTrans.position);
+        // }
     }
 
     // public void LevelUp(int level)
@@ -157,4 +157,18 @@ public class EnvGenerator : Service
     //     // currentType = level2collection[currentLevel];
     //     ReadLevelConfig();
     // }
+}
+
+public class GenerateUnit
+{
+    public GenerateUnit(Vector2 unitPos, EObject type,Quaternion rotation)
+    {
+        this.unitPos = unitPos;
+        this.type = type;
+        this.rotation = rotation;
+    }
+
+    public Vector2 unitPos;
+    public EObject type;
+    public Quaternion rotation;
 }
