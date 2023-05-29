@@ -97,7 +97,7 @@ namespace LevelDesign
         {
             get => new Bounds(CenterXY, SizeXY);
         }
-        
+
 
         [Header("[编辑模式]目标对象")] [SerializeField]
         private GameObject editorTarget;
@@ -169,7 +169,8 @@ namespace LevelDesign
                     return true;
                 }
             }
-            Debug.Log("与障碍相交");
+
+            // Debug.Log("与障碍相交");
             return false;
         }
 
@@ -227,9 +228,9 @@ namespace LevelDesign
         /// 运行时使用
         /// </summary>
         /// <returns></returns>
-        public void RuntimeGenerateObstacles(List<GenerateUnit> units, List<EObject> anchorTypes,List<EObject> floatTypes, Vector2 generatePos)
+        public void RuntimeGenerateObstacles(List<GenerateUnit> units, List<EObject> anchorTypes,
+            List<EObject> floatTypes, Vector2 generatePos)
         {
-            generatedBounds.Clear();
             int thresh = anchorTypes.Count;
             int tot = anchorTypes.Count + floatTypes.Count;
             for (int i = 0; i < generateCount; i++)
@@ -253,7 +254,7 @@ namespace LevelDesign
             {
                 bool anchorRight = Random.Range(0, 2) == 1; // false as left, true as right
 
-                Debug.Log($"dictSize:{e2obj.Count} sel:{sel} anchorTypes{anchortypes[sel]}");
+                // Debug.Log($"dictSize:{e2obj.Count} sel:{sel} anchorTypes{anchortypes[sel]}");
                 Vector2 bdSize = e2obj[anchortypes[sel]].GetComponent<SpriteRenderer>().bounds.size;
                 Vector2 center = new Vector2(anchorRight ? MaxX - 0.5f * bdSize.x : MinX + 0.5f * bdSize.x,
                     Random.Range(MinY, MaxY));
@@ -262,7 +263,7 @@ namespace LevelDesign
 
                 // 检查是否超出边界
                 // 检查是否处与障碍区域相交
-                if (!InRegion(bounds,generatePos) || IntersectWithObstacle(bounds))
+                if (!InRegion(bounds, generatePos) || IntersectWithObstacle(bounds))
                 {
                     continue;
                 }
@@ -279,7 +280,7 @@ namespace LevelDesign
                 }
 
                 // newAnchorObstacle.transform.position = center;
-                newPos = center ;
+                newPos = center;
                 units.Add(new GenerateUnit(newPos, anchortypes[sel], rotation));
 
                 bounds.Expand(new Vector2(gapX, gapY) * 2f);
@@ -300,7 +301,7 @@ namespace LevelDesign
 
                 // 检查是否超出边界
                 // 检查是否处与障碍区域相交
-                if (!InRegion(bounds,generatePos) || IntersectWithObstacle(bounds))
+                if (!InRegion(bounds, generatePos) || IntersectWithObstacle(bounds))
                 {
                     continue;
                 }
@@ -310,50 +311,53 @@ namespace LevelDesign
                 // newFloatObstacle.name = newFloatObstacle.name.Replace("(Clone)", "");
                 // newFloatObstacle.transform.position = center;
                 newPos = center;
-                units.Add(new GenerateUnit(newPos,floatTypes[sel],Quaternion.Euler(0,0,0)));
-                    // newFloatObstacle.transform.SetParent(parent);
+                units.Add(new GenerateUnit(newPos, floatTypes[sel], Quaternion.Euler(0, 0, 0)));
+                // newFloatObstacle.transform.SetParent(parent);
 
                 bounds.Expand(new Vector2(gapX, gapY) * 2f);
                 generatedBounds.Add(bounds);
                 break;
             }
         }
-        private void RuntimeGenerateCollection(List<GenerateUnit> units,Vector2 generatePos)
-        {
-            Vector2 xy = Vector2.zero;
-            Bounds bounds = new(xy, collectionSize);
-            bool check = false;
 
+        private void RuntimeGenerateCollection(List<GenerateUnit> units, Vector2 generatePos)
+        {
             for (int i = 0; i < retryMax; i++)
             {
-                xy = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY))+generatePos;
-                bounds = new Bounds(xy, collectionSize);
+                Vector2 bdSize = e2obj[EObject.Collection].GetComponent<SpriteRenderer>().bounds.size;
+                Vector2 center = new Vector2(Random.Range(MinX, MaxX), Random.Range(MinY, MaxY));
+                center += (Vector2)generatePos;
+                Bounds bounds = new Bounds(center, bdSize);
 
+                // Debug.Log($"收集物坐标{xy}");
                 // 检查是否超出边界
                 // 检查是否处与障碍区域相交
-                if (InRegion(bounds,generatePos) && !IntersectWithObstacle(bounds))
+                // if (!IntersectWithObstacle(bounds))
+                // if (InRegion(bounds, generatePos) && !IntersectWithObstacle(bounds))
+                if (!InRegion(bounds, generatePos) || IntersectWithObstacle(bounds))
                 {
-                    check = true;
-                    break;
+                    continue;
                 }
+
+                // else Debug.Log("生成不重叠的收集物失败");
+                var newPos = center;
+                // newCollection.transform.position = xy;
+                // newCollection.transform.SetParent(parent);
+                bounds.Expand(new Vector2(gapX, gapY) * 2f);
+                units.Add(new GenerateUnit(newPos, EObject.Collection, Quaternion.Euler(0, 0, 0)));
+                generatedBounds.Add(bounds);
+                break;
             }
 
-            var newCollection = Instantiate(collection);
-            newCollection.name = newCollection.name.Replace("(Clone)", "");
-            xy = check ? xy : CenterXY;
-            var newPos = xy;
-            newCollection.transform.position = xy;
-            // newCollection.transform.SetParent(parent);
-            bounds = new(xy, collectionSize);
-            bounds.Expand(new Vector2(gapX, gapY) * 2f);
-            units.Add(new GenerateUnit(newPos,EObject.Collection,Quaternion.Euler(0,0,0)));
-            generatedBounds.Add(bounds);
+            //var newCollection = Instantiate(collection);
+            // newCollection.name = newCollection.name.Replace("(Clone)", "");
         }
 
         public void InitE2ObjDict(Dictionary<EObject, GameObject> dict)
         {
             e2obj = dict;
         }
+
         #endregion
 
 
@@ -497,24 +501,31 @@ namespace LevelDesign
             return target;
         }
 
-        public void RuntimeGenerate(Vector2 pos,List<EObject> anchorTypes,List<EObject> floatTypes,bool ifGenerateCollection,EObject type)
+        public void RuntimeGenerate(Vector2 pos, List<EObject> anchorTypes, List<EObject> floatTypes,
+            bool ifGenerateCollection, EObject type)
         {
+            generatedBounds.Clear();
             if (!_objectManager)
                 _objectManager = ServiceLocator.Get<ObjectManager>();
             List<GenerateUnit> units = new List<GenerateUnit>();
-            RuntimeGenerateObstacles(units,anchorTypes,floatTypes,pos);
             RuntimeGenerateCollection(units, pos);
+            RuntimeGenerateObstacles(units, anchorTypes, floatTypes, pos);
+            
             foreach (var unit in units)
             {
-                if(unit.type!=EObject.Collection)
+                Debug.Log(unit.type);
+                if (unit.type != EObject.Collection)
                 {
                     Transform unitTrans = _objectManager.Activate(unit.type, unit.unitPos).Transform;
                     unitTrans.rotation = unit.rotation;
+                    continue;
                 }
 
-                if (type == EObject.Collection) return;
-                Transform coTrans = _objectManager.Activate(type, unit.unitPos).Transform;
-                coTrans.rotation = unit.rotation;
+                if (ifGenerateCollection)
+                {
+                    Transform coTrans = _objectManager.Activate(type, unit.unitPos).Transform;
+                    coTrans.rotation = unit.rotation;
+                }
             }
         }
     }

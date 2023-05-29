@@ -112,7 +112,10 @@ public class EnvGenerator : Service
         Collection co = collections[currentType];
         if ((lastCombinePos - CurrentHeight) > 0)
         {
+            Debug.Log($"last:{co.lastPos} interval:{co.interval} current:{CurrentHeight}");
             bool ifGenerateCollection = (Mathf.Abs(co.lastPos - CurrentHeight) > co.interval);
+            if (ifGenerateCollection)
+                co.lastPos = CurrentHeight;
             generateY = CameraDown - 2 * camera.orthographicSize;
             generator.DoGenerate(new Vector2(generateX, generateY),ifGenerateCollection);
             // // Debug.Log("DownGenerate");
@@ -128,6 +131,8 @@ public class EnvGenerator : Service
         else
         {
             bool ifGenerateCollection = (Mathf.Abs(co.lastPos - CurrentHeight) > co.interval);
+            if (ifGenerateCollection)
+                co.lastPos = CurrentHeight;
             generateY = CameraUp + 2 * camera.orthographicSize;
             generator.DoGenerate(new Vector2(generateX, generateY),ifGenerateCollection);
             // Debug.Log("UpGenerate");
